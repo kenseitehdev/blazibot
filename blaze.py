@@ -1,4 +1,4 @@
-from redbot.core.utils.chat_formatting import pagify 
+from redbot.core.utils.chat_formatting import pagify
 import re
 from redbot.core import commands
 import webbrowser
@@ -53,7 +53,7 @@ class blaze(commands.Cog):
         self.count=0
     @commands.command(name='moves' , aliases=["m"])
     async def moves (self, ctx):
-        await ctx.send("this will show your selected moves") 
+        await ctx.send("this will show your selected moves")
         conn=sqlite3.connect('157.245.8.88:~/blazibot/blazedb.db')
 
         c = conn.cursor()
@@ -75,12 +75,12 @@ class blaze(commands.Cog):
         m4=move[3]
         m4=m4[1:-1]
         movesselected=f"""
-                        ``` 
+                        ```
                             {m1}  |  {m2}  |
                              --------------
                             {m3}  |  {m4}  |```"""
         await ctx.send(movesselected)
-        c.close()    
+        c.close()
     @commands.command(name='doubleteam' , aliases=["agility"])
     async def doubleteam(self, ctx):
        conn=sqlite3.connect('157.245.8.88:~/blazibot/blazedb.db')
@@ -97,8 +97,8 @@ class blaze(commands.Cog):
        selectedname=c.fetchone()
        selectedname=str(selectedname)
        selectedname=selectedname[2:-3]
-       c.close()   
-       await ctx.send(f"{ctx.author.mention}'s {selectedname}'s evasiveness rose-- Nothing can touch it now!")   
+       c.close()
+       await ctx.send(f"{ctx.author.mention}'s {selectedname}'s evasiveness rose-- Nothing can touch it now!")
     @commands.command(name='defensecurl' , aliases=["df"])
     async def defensecurl(self, ctx):
        conn=sqlite3.connect('157.245.8.88:~/blazibot/blazedb.db')
@@ -115,8 +115,8 @@ class blaze(commands.Cog):
        selectedname=c.fetchone()
        selectedname=str(selectedname)
        selectedname=selectedname[2:-3]
-       c.close()   
-       await ctx.send(f"{ctx.author.mention}'s {selectedname}'s defense Rose dramatically!")    
+       c.close()
+       await ctx.send(f"{ctx.author.mention}'s {selectedname}'s defense Rose dramatically!")
     @commands.command(name='helpinghand' , aliases=["hh"])
     async def helpinghand(self, ctx):
        conn=sqlite3.connect('157.245.8.88:~/blazibot/blazedb.db')
@@ -133,8 +133,8 @@ class blaze(commands.Cog):
        selectedname=c.fetchone()
        selectedname=str(selectedname)
        selectedname=selectedname[2:-3]
-       c.close()   
-       await ctx.send(f"{ctx.author.mention}'s {selectedname} is ready to assist!") 
+       c.close()
+       await ctx.send(f"{ctx.author.mention}'s {selectedname} is ready to assist!")
     @commands.command(name='givedeems' , aliases=["gd"])
     async def givedeems(self, ctx,player:discord.Member,amt:int):
         conn=sqlite3.connect('157.245.8.88:~/blazibot/blazedb.db')
@@ -196,44 +196,44 @@ class blaze(commands.Cog):
         numpokeraid=namelist.split(',')
         numberofnames=len(numpokeraid)
         selectedboss=rand.randint(0,numberofnames)
-        
+
         selectedbosspoke=numpokeraid[selectedboss]
         embed = discord.Embed(title=selectedbosspoke, description="Group Pokemon Raid", color=0x00ff00)
         embed.set_image(url=f"http://157.245.8.88/html/dex/media/pokemon/sugimori/{selectedbosspoke}.png")
         embed.add_field(name="How to play!", value="React to Fight the Boss!", inline=False)
         raidstuff=await ctx.send(embed=embed)
         raidtime=20
-        
-        
+
+
         await raidstuff.add_reaction("⚔")
-        
+
         await raidstuff.add_reaction("🛡")
-         
+
         await raidstuff.add_reaction("🍙")
-             
+
         reactioncount=20
         raids = discord.Embed(title='raidstimer', description="Raid Timer", color=0x00ff00)
-        raids.add_field(name="Countdown", value=str(raidtime), inline=False)       
+        raids.add_field(name="Countdown", value=str(raidtime), inline=False)
         ti=await ctx.send("start timer")
         players1=[]
         players2=[]
         players3=[]
         reactioncount=2
         while raidtime>0:
-        
+
             raidtime -=1
             await asyncio.sleep(1)
             await ti.edit(content=str(raidtime))
-          
+
             reactionstuff=['⚔','🛡','🍙']
-            
+
         if raidtime<=0:
                 await ti.edit(content="Calculating..")
                 raidstuff = await raidstuff.channel.fetch_message(raidstuff.id)
                 output = ""
                 user_ids= ""
                 output = '\n'.join(f"{r.emoji}: {r.count}" for r in raidstuff.reactions)
-                
+
                 currentlist=0
                 plist=[]
                 for reaction in raidstuff.reactions:
@@ -258,7 +258,7 @@ class blaze(commands.Cog):
             selected=c.fetchone()
             selected=str(selected)
             selected=selected[1:-2]
-            if 'o'not in selected: 
+            if 'o'not in selected:
                 c.execute(f"select poke_id from Owned_Pokes where Number_Caught={selected} and Owner=={plist[0][p]}")
                 pokenum=c.fetchone()
                 pokenum=str(pokenum)
@@ -290,7 +290,7 @@ class blaze(commands.Cog):
             selected=c.fetchone()
             selected=str(selected)
             selected=selected[1:-2]
-            if 'o'not in selected: 
+            if 'o'not in selected:
                 c.execute(f"select poke_id from Owned_Pokes where Number_Caught={selected} and Owner=={plist[1][a]}")
                 pokenum=c.fetchone()
                 pokenum=str(pokenum)
@@ -307,7 +307,7 @@ class blaze(commands.Cog):
             selected=c.fetchone()
             selected=str(selected)
             selected=selected[1:-2]
-            if 'o'not in selected: 
+            if 'o'not in selected:
                 c.execute(f"select poke_id from Owned_Pokes where Number_Caught={selected} and Owner=={plist[2][b]}")
                 pokenum=c.fetchone()
                 pokenum=str(pokenum)
@@ -317,13 +317,13 @@ class blaze(commands.Cog):
                 name=str(name)
                 name=name[2:-3]
                 supportingpokes.append(name)
-            b=b+1        
+            b=b+1
         attackpower=0
         defendpower=0
         hppower=0
         speedpower=0
         supportpower=0
-        
+
         for pk in fightingpokes:
             c.execute(f"select attack from Pokes where Name='{pk}'")
             atk=c.fetchone()
@@ -336,7 +336,7 @@ class blaze(commands.Cog):
             atk=atk*int(level)
             atk=atk*1.5
             attackpower=attackpower+int(atk)
-            
+
         for pk in defendingpokes:
             c.execute(f"select defense from Pokes where Name='{pk}'")
             df=c.fetchone()
@@ -361,7 +361,7 @@ class blaze(commands.Cog):
             atk=int(atk)*int(level)
             atk=atk/2
             atk=int(atk)
-            
+
             suportpower=supportpower+int(atk)
             supportpower=supportpower+20
         attackpower=attackpower+supportpower
@@ -377,15 +377,15 @@ class blaze(commands.Cog):
         stats=bosstat.split(',')
         bossatk=int(stats[0])
         raideratk=int(attackpower)
-        
-        while bossatk>1 and raideratk>1: 
+
+        while bossatk>1 and raideratk>1:
             if raideratk<1:
                 await ctx.send("Raiders win!")
                 c.execute(f"select cash from raidtable where name='{selectedbosspoke}'")
                 cash=c.fetchone()
                 cash=str(cash)
                 cash=cash[1:-2]
-                cash=int(cash)                
+                cash=int(cash)
                 c.execute(f"select items from raidtable where name='{selectedbosspoke}'")
                 items=c.fetchone()
                 items=str(items)
@@ -398,14 +398,14 @@ class blaze(commands.Cog):
                     user= ctx.get_user(g)
                     await ctx.send(f"{user.mention}")
                     await bank.deposit_credits(user, cash/10)
-                    
-                    
-            
-            raideratk=raideratk-int(stats[1])            
-            bossatk=bossatk-defense      
+
+
+
+            raideratk=raideratk-int(stats[1])
+            bossatk=bossatk-defense
             if raideratk<1:
                 await ctx.send("The raid boss won.better luck next time.")
-                
+
             elif (bossatk<1):
                 await ctx.send("Raiders win!")
                 c.execute(f"select cash from raidtable where name='{selectedbosspoke}'")
@@ -424,10 +424,10 @@ class blaze(commands.Cog):
                 randitem=rand.randint(0,itemlen-1)
                 item=itemslist[randitem]
                 item=item.replace("\\","")
-                
-                
-                
-                
+
+
+
+
                 i=0
                 plen=len(plist[0])
                 for l in plist[0]:
@@ -437,7 +437,7 @@ class blaze(commands.Cog):
                     c.execute(f"select number from items where name='{item}' and Owner={user.id}")
                     num=c.fetchone()
                     num=str(num)
-        
+
                     if "None" in num:
                         c.execute(f"insert into items(Owner,name,number) Values({user.id},'{item}',1);")
                         conn.commit()
@@ -447,21 +447,21 @@ class blaze(commands.Cog):
                         c.execute(f"update items set number={num+1} where name='{item}' and Owner={user.id}")
                         conn.commit()
                 await ctx.send(f"Raiders won {str(cash)} credits and 1 {item}")
-                
-                
+
+
             else:
                 " "
-                
-            
-       
-            
-            
-      
-            
+
+
+
+
+
+
+
     @commands.command(name='howto' , aliases=["how"])
     async def howto(self, ctx):
         info="""Tutorial For Blazibot!
-        
+
 [1] To start just type -start
 [2] You probably want to view it now, don't you? Well just type -i 1
 [3] Maybe you want some credits to start your journey, just type -payday
@@ -510,11 +510,11 @@ class blaze(commands.Cog):
         p1.append(sp_defnpcstat)
         p1.append(speednpcstat)
         await ctx.send(embed=embed)
-        
+
         hpnpc=500
         hpplayer=500
         atkplayerstat=31
-        while hpnpc>1 and hpplayer>1: 
+        while hpnpc>1 and hpplayer>1:
             c.execute("Select identifier from Moves where power != 'null'")
             possiblemoves=c.fetchall()
             possiblemoves=str(possiblemoves)
@@ -529,10 +529,10 @@ class blaze(commands.Cog):
             level1=50
             advant1=1
             moveselected=selectmove[randmove]
-            await ctx.send(f'Select a move {ctx.author.mention}!') 
+            await ctx.send(f'Select a move {ctx.author.mention}!')
             move = await self.bot.wait_for("message",timeout=300)
             while move.author.id != ctx.author.id and 'use' not in move.content:
-                await ctx.send(f'Select a move {ctx.author.mention}!') 
+                await ctx.send(f'Select a move {ctx.author.mention}!')
                 move = await self.bot.wait_for("message",timeout=300)
             movec=move.content
             playermove="move"+movec[-1:]
@@ -553,7 +553,7 @@ class blaze(commands.Cog):
             c.execute(f"select power from moves where identifier='{moveselected[1:]}'")
             npcpower=c.fetchone()
             npcpower=str(npcpower)
-            
+
             npcpower=npcpower[2:-3]
             await ctx.send(npcpower)
             damagenpc=int(npcpower)*int(atknpcstat)
@@ -579,7 +579,7 @@ class blaze(commands.Cog):
         c = conn.cursor()
         await ctx.send(f"Attempting to disable {str(oldchannel)}")
         old = oldchannel.id
-        
+
         c.execute(f"select disabled from disables where disabled='{old}'")
         exists=c.fetchone()
         exists=str(exists)
@@ -589,7 +589,7 @@ class blaze(commands.Cog):
             await ctx.send("You have successfully disabled this channel")
         else:
             await ctx.send("You have already disabled this channel!")
-        c.close()  
+        c.close()
     @commands.command(name='redirect' , aliases=["change spawn"])
     @checks.admin()
     async def redirect(self, ctx,oldchannel:discord.TextChannel, newchannel:discord.TextChannel):
@@ -598,7 +598,7 @@ class blaze(commands.Cog):
         await ctx.send(f"Attempting to redirect from {str(oldchannel)} to {str(newchannel)}")
         old = oldchannel.id
         new=newchannel.id
-        
+
         c.execute(f"select redirect_channel from redirects where channel_id='{old}'")
         exists=c.fetchone()
         exists=str(exists)
@@ -608,9 +608,9 @@ class blaze(commands.Cog):
             await ctx.send("You have successfully redirected")
         else:
             await ctx.send("You have already redirected from this channel!")
-        c.close()  
+        c.close()
     @commands.command(name='inv' , aliases=["invitebot"])
-    async def inv(self, ctx):        
+    async def inv(self, ctx):
         await ctx.send("https://discordapp.com/oauth2/authorize?client_id=548295233138327583&scope=bot")
     @commands.command(name='movesets' , aliases=["ms"])
     async def movesets(self, ctx):
@@ -622,7 +622,7 @@ class blaze(commands.Cog):
         c.execute(f"select selected from Players where ID='{author}'")
         num=c.fetchone()
         num=str(num).strip(",").strip(")").strip("(")
-        
+
 
         num=num[:-1]
         c.execute(f"select poke_id from Owned_Pokes where {num}=ID_Owned and Owner={author}")
@@ -635,7 +635,7 @@ class blaze(commands.Cog):
         count=0
         mo=moves.split(',')
         for m in mo:
-            
+
             try:
                 c.execute(f"select identifier from Moves where id={int(m)}")
                 a=c.fetchone()
@@ -654,11 +654,11 @@ class blaze(commands.Cog):
             except:
                 print("error")
         ls=[]
-        [ls.append(x) for x in move if x not in ls] 
+        [ls.append(x) for x in move if x not in ls]
         await menu(ctx, str(ls).replace(",","").replace("'","").replace("#",'\n').replace("','","").split('.'), DEFAULT_CONTROLS)
-        
+
         c.close()
-    
+
     @commands.command(name='learn' , aliases=["l"])
     async def learn(self, ctx,spot:str,movename:str):
         author=ctx.author.id
@@ -689,19 +689,19 @@ class blaze(commands.Cog):
         count=0
         mo=moves.split(',')
         for m in mo:
-            
+
             try:
                 c.execute(f"select identifier from Moves where id={int(m)}")
                 a=c.fetchone()
                 a=str(a)
                 a=a[2:-3]
                 b=a
-                
+
                 move.append(str(b))
             except:
                 print("error")
         ls=[]
-        [ls.append(x) for x in move if x not in ls] 
+        [ls.append(x) for x in move if x not in ls]
         if movename.casefold() in ls:
             await ctx.send(movename+" is being learnt!")
             c.execute(f"update Owned_Pokes set {moveslot.capitalize()}='{movename}' where Owner={author} and {num}=ID_Owned")
@@ -711,9 +711,9 @@ class blaze(commands.Cog):
         c.close()
     @commands.command(name='start' , aliases=["begin"])
     async def start (self, ctx):
-        conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
-                
-        author=ctx.author.id          
+        conn = sqlite3.connect('/root/blazibot/blazedb.db')
+
+        author=ctx.author.id
         c = conn.cursor()
         c.execute(f"SELECT ID from Players where ID='{author}';")
         exists=c.fetchone()
@@ -724,12 +724,12 @@ class blaze(commands.Cog):
             await ctx.send('http://24.media.tumblr.com/76a62fc06cba1d98361add310f69a5de/tumblr_mxg5t6FckL1t2frpuo1_500.gif')
             await ctx.send('Hello there! \nWelcome to the world of Pokémon! My name is Oak! People call me the Pokémon Prof! \nThis world is inhabited by creatures called Pokémon! For some people, Pokémon are pets. Other use them for fights. \nMyself… I study Pokémon as a profession. \nFirst, what is your name?')
             name = await self.bot.wait_for("message",timeout=300)
-            while name.author.id != author:   
-                 name = await self.bot.wait_for("message",timeout=1000)   
+            while name.author.id != author:
+                 name = await self.bot.wait_for("message",timeout=1000)
             await ctx.send('Oak: Ah, I remember! Your name is '+name.content)
-            await ctx.send(f'Oak: Which region are you travelling from {name.content}?') 
+            await ctx.send(f'Oak: Which region are you travelling from {name.content}?')
             region = await self.bot.wait_for("message",timeout=300)
-            await ctx.send(f'Oak: Which region are you travelling from {name.content}?') 
+            await ctx.send(f'Oak: Which region are you travelling from {name.content}?')
             while region.author.id != author:
                  region = await self.bot.wait_for("message",timeout=1000)
             starters=[""]
@@ -749,22 +749,22 @@ class blaze(commands.Cog):
                 starters=["Litten","Popplio","Rowlet"]
             else:
                 await ctx.send("```Please pick a valid region!```")
-            await ctx.send(f'Would you like {starters[0]}, {starters[1]}, or {starters[2]}')            
+            await ctx.send(f'Would you like {starters[0]}, {starters[1]}, or {starters[2]}')
             starter = await self.bot.wait_for("message",timeout=1000)
-            while starter.author.id != author:   
+            while starter.author.id != author:
                 starter = await self.bot.wait_for("message",timeout=1000)
             starter=starter.content.casefold().capitalize()
-            await ctx.send(f'So, you want the {starter} (y/n)')        
+            await ctx.send(f'So, you want the {starter} (y/n)')
             yesnostart= await self.bot.wait_for("message",timeout=10000)
-            while yesnostart.author.id != author: 
-                yesnostart= await self.bot.wait_for("message",timeout=10000)  
+            while yesnostart.author.id != author:
+                yesnostart= await self.bot.wait_for("message",timeout=10000)
             if yesnostart.content.casefold().capitalize()=='Y' and starter in starters:
                 await ctx.send(f'{starter} is a great Pokemon!')
-            
+
                 c.execute(f"INSERT INTO Players(ID , nick , poke1 , poke2 , poke3 , poke4 ,poke5 , poke6 , role, selected ) VALUES('{str(author)}','{name.content}',1,0,0,0, 0,0,'Initiate',1);")
                 conn.commit()
-                
-            
+
+
                 c.execute(f"Select Number from Pokes where Name='{starter}'")
                 snum=c.fetchone()
                 snum=str(snum)
@@ -773,14 +773,14 @@ class blaze(commands.Cog):
 
                 await ctx.send(snum)
                 await ctx.send(snum+"pokemon")
-               
+
                 hp=rand.randint(0,31)
                 atk=rand.randint(0,31)
                 df=rand.randint(0,31)
                 sp_atk=rand.randint(0,31)
                 sp_def=rand.randint(0,31)
                 speed=rand.randint(0,31)
-                
+
                 c.execute(f"select nature from Natures")
                 natures=c.fetchall()
                 natures=str(natures)
@@ -816,19 +816,19 @@ class blaze(commands.Cog):
                  starter = await self.bot.wait_for("message",timeout=10000)
                  await ctx.send(f'So, you want the {starter.content} (y/n)')
                  yesnostart= await self.bot.wait_for("message",timeout=10000)
-                    
+
             else:
                  await ctx.send('Try again!')
             c.close()
     @commands.command(name='unequip' , aliases=["ue"])
     async def unequip(self, ctx, item:str):
-        conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
+        conn = sqlite3.connect('/root/blazibot/blazedb.db')
         c = conn.cursor()
         if "Motor" in item:
             c.execute(f"select number from items where name='{item}' and Owner={ctx.author.id}")
             num=c.fetchone()
             num=str(num)
-        
+
             if "None" in num:
                 c.execute(f"insert into items(Owner,name,number) Values({ctx.author.id},'{item}',1);")
                 conn.commit()
@@ -840,12 +840,12 @@ class blaze(commands.Cog):
                 c.execute(f"update Players set Equipped='None' where ID={ctx.author.id}")
                 conn.commit()
             await ctx.send(f"You unequipped 1 {item}")
-            
+
         elif "mega" in item:
             c.execute(f"select number from items where name='{item}' and Owner={ctx.author.id}")
             num=c.fetchone()
             num=str(num)
-        
+
             if "None" in num:
                 c.execute(f"insert into items(Owner,name,number) Values({ctx.author.id},'{item}',1);")
                 conn.commit()
@@ -865,7 +865,7 @@ class blaze(commands.Cog):
                 poke=poke
                 await ctx.send(poke)
                 c.execute(f"update Owned_Pokes set item='None' where Number_Caught={select} and Owner={ctx.author.id}")
-                
+
                 conn.commit()
             c.execute(f"select selected from Players where ID={ctx.author.id}")
             selected=c.fetchone()
@@ -883,8 +883,8 @@ class blaze(commands.Cog):
         c.close()
     @commands.command(name='equip' , aliases=["e"])
     async def equip(self, ctx, item:str):
-        await ctx.send("You can equip items to your pokemon this way!") 
-        conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
+        await ctx.send("You can equip items to your pokemon this way!")
+        conn = sqlite3.connect('/root/blazibot/blazedb.db')
         c = conn.cursor()
         c.execute(f"select name from items where owner={ctx.author.id}")
         itemslist=c.fetchall()
@@ -902,7 +902,7 @@ class blaze(commands.Cog):
         haveitem=False
         c.execute(f"select Name from Pokes where Number={poke}")
         name=c.fetchone()
-        name=str(name)     
+        name=str(name)
         if item in itemslist and 'Mega-' not in name :
             await ctx.send(item)
             await ctx.send(f"You are trying to equip a {item}")
@@ -936,12 +936,12 @@ class blaze(commands.Cog):
                 if level>4:
                     c.execute(f"update Owned_Pokes set item='mega-stone' where Number_Caught={select} and Owner={ctx.author.id}")
                     conn.commit()
-                    
+
                 else:
-                    await ctx.send("You cant mega an egg!")    
+                    await ctx.send("You cant mega an egg!")
             elif("tm" in item or "Tm" in item or "TM" in item):
                 await ctx.send("Which move would you like for it to learn?")
-                move = await self.bot.wait_for("message",timeout=1000)  
+                move = await self.bot.wait_for("message",timeout=1000)
                 while move.author.id != ctx.author.id:
                    await ctx.send("Which move would you like for it to learn?")
                    move= await self.bot.wait_for("message",timeout=1000)
@@ -950,10 +950,10 @@ class blaze(commands.Cog):
                     slot = await self.bot.wait_for("message",timeout=1000)
                     while slot.author.id != ctx.author.id:
                        await ctx.send("Which move slot?")
-                       slot = await self.bot.wait_for("message",timeout=1000) 
-                    
-                    learnslot="" 
-                    await ctx.send(slot.content)                       
+                       slot = await self.bot.wait_for("message",timeout=1000)
+
+                    learnslot=""
+                    await ctx.send(slot.content)
                     if "1" in slot.content:
                        learnslot="move1"
                     elif "2" in slot.content:
@@ -1006,7 +1006,7 @@ class blaze(commands.Cog):
                     else:
                         newgender="Female"
                 c.execute(f"update Owned_Pokes set gender='{newgender}' where Number_Caught={select} and Owner={ctx.author.id}")
-                conn.commit()      
+                conn.commit()
             elif('everstone' in item or "Everstone" in item):
                 c.execute(f"select selected from Players where ID={ctx.author.id}")
                 selected=c.fetchone()
@@ -1017,7 +1017,7 @@ class blaze(commands.Cog):
                 poke=c.fetchone()
                 poke=str(poke)
                 c.execute(f"update Owned_Pokes set item='Everstone' where Number_Caught={select} and Owner={ctx.author.id}")
-                conn.commit()         
+                conn.commit()
             elif('alolan' in item or "Alolan" in item):
                 c.execute(f"select selected from Players where ID={ctx.author.id}")
                 selected=c.fetchone()
@@ -1065,9 +1065,9 @@ class blaze(commands.Cog):
                     newev=int(totalevs[0])+(10*count)
                     c.execute(f"update Owned_Pokes set Ev1={newev} where Number_Caught={select} and Owner={ctx.author.id}")
                     conn.commit()
-                    await ctx.send("you have added evs to your pokemon's health") 
+                    await ctx.send("you have added evs to your pokemon's health")
             elif('protein' in item or "Protein" in item):
-                
+
                 c.execute(f"select selected from Players where ID={ctx.author.id}")
                 selected=c.fetchone()
                 selected = str(selected)
@@ -1116,7 +1116,7 @@ class blaze(commands.Cog):
                     newev=int(totalevs[2])+10
                     c.execute(f"update Owned_Pokes set Ev3={newev} where Number_Caught={select} and Owner={ctx.author.id}")
                     conn.commit()
-                    await ctx.send("you have added evs to your pokemon's defense")   
+                    await ctx.send("you have added evs to your pokemon's defense")
             elif('calcium' in item or "Calcium" in item):
                 c.execute(f"select selected from Players where ID={ctx.author.id}")
                 selected=c.fetchone()
@@ -1140,7 +1140,7 @@ class blaze(commands.Cog):
                     newev=int(totalevs[3])+10
                     c.execute(f"update Owned_Pokes set ev4={newev} where Number_Caught={select} and Owner={ctx.author.id}")
                     conn.commit()
-                    await ctx.send("you have added evs to your pokemon's Special Attack")              
+                    await ctx.send("you have added evs to your pokemon's Special Attack")
             elif('Zinc' in item or "zinc" in item):
                 c.execute(f"select selected from Players where ID={ctx.author.id}")
                 selected=c.fetchone()
@@ -1174,7 +1174,7 @@ class blaze(commands.Cog):
                 selected=selected[1:-2]
                 select=int(selected)
                 c.execute(f"update Owned_Pokes set Ev1=0,Ev2=0,Ev3=0,Ev4=0,Ev5=0,Ev6=0 where Number_Caught={select} and Owner={ctx.author.id}")
-                conn.commit()            
+                conn.commit()
             elif('Carbos' in item or "carbos" in item):
                 c.execute(f"select selected from Players where ID={ctx.author.id}")
                 selected=c.fetchone()
@@ -1225,14 +1225,14 @@ class blaze(commands.Cog):
                 abilitylen=len(abilities)
                 randabil=rand.randint(0,abilitylen-1)
                 ability=abilities[randabil]
-                
+
                 c.execute(f"select ability from Owned_Pokes where Number_Caught={select} and Owner={ctx.author.id}")
                 poke=c.fetchone()
                 poke=str(poke)
                 if ability in poke:
                        randabil=rand.randint(0,abilitylen-1)
                        ability=abilities[randabil]
-                
+
                 c.execute(f"update Owned_Pokes set ability='{ability}' where Number_Caught={select} and Owner={ctx.author.id}")
                 conn.commit()
                 await ctx.send(f" You have changed your pokemons ability to {ability}")
@@ -1246,7 +1246,7 @@ class blaze(commands.Cog):
                 poke=c.fetchone()
                 poke=str(poke)
                 await ctx.send(f"Your pokemon's nature is {poke}, what would you like to change it to?")
-                nat = await self.bot.wait_for("message",timeout=1000)  
+                nat = await self.bot.wait_for("message",timeout=1000)
                 while nat.author.id != ctx.author.id:
                    await ctx.send("Your pokemon's nature is {poke}, what would you like to change it to?")
                    nat= await self.bot.wait_for("message",timeout=1000)
@@ -1262,7 +1262,7 @@ class blaze(commands.Cog):
             elif("Motorcycle" in item):
                 c.execute(f"update Players set Equipped='Motorcycle' where ID={ctx.author.id}")
                 conn.commit()
-                await ctx.send("You have equipped a motorcycle!") 
+                await ctx.send("You have equipped a motorcycle!")
             elif("Trade-evolver" in item):
                 c.execute(f"select selected from Players where ID={ctx.author.id}")
                 selected=c.fetchone()
@@ -1283,11 +1283,11 @@ class blaze(commands.Cog):
                 else:
                     c.execute(f"update Owned_Pokes set poke_id={newpoke} where Owner={ctx.author.id} and Number_Caught={select}")
                     conn.commit()
-                    await ctx.send("Your pokemon evolved!")        
+                    await ctx.send("Your pokemon evolved!")
             elif("Bike" in item):
                 c.execute(f"update Players set Equipped='Bike' where ID={ctx.author.id}")
                 conn.commit()
-                await ctx.send("You have equipped a Bike!")            
+                await ctx.send("You have equipped a Bike!")
             elif("Rare-candy" in item):
                 c.execute(f"select selected from Players where ID={ctx.author.id}")
                 selected=c.fetchone()
@@ -1304,7 +1304,7 @@ class blaze(commands.Cog):
                 level=level[1:-2]
                 await ctx.send(level)
                 lv=int(level)
-                
+
                 if lv<100 and lv>4:
                     lv=lv+1
                     c.execute(f"update Owned_Pokes set level={lv} where Number_Caught={select} and Owner={ctx.author.id}")
@@ -1328,7 +1328,7 @@ class blaze(commands.Cog):
                 level=level[1:-2]
                 await ctx.send(level)
                 lv=int(level)
-                
+
                 if lv<91 and lv>4:
                     lv=lv+10
                     c.execute(f"update Owned_Pokes set level={lv} where Number_Caught={select} and Owner={ctx.author.id}")
@@ -1351,7 +1351,7 @@ class blaze(commands.Cog):
                 level=str(level)
                 level=level[1:-2]
                 lv=int(level)
-                
+
                 if lv>4:
                     lv=100
                     c.execute(f"update Owned_Pokes set level={lv} where Number_Caught={select} and Owner={ctx.author.id}")
@@ -1371,7 +1371,7 @@ class blaze(commands.Cog):
                 await ctx.send(poke)
                 c.execute(f"update Owned_Pokes set item='{item}' where Number_Caught={select} and Owner={ctx.author.id}")
                 conn.commit()
-                
+
             elif("Life-orb" in item):
                 c.execute(f"select selected from Players where ID={ctx.author.id}")
                 selected=c.fetchone()
@@ -1384,7 +1384,7 @@ class blaze(commands.Cog):
                 c.execute(f"update Owned_Pokes set item='{item}' where Number_Caught={select} and Owner={ctx.author.id}")
                 conn.commit()
                 await ctx.send(poke)
-                
+
             elif("Thick-staff" in item):
                 c.execute(f"select selected from Players where ID={ctx.author.id}")
                 selected=c.fetchone()
@@ -1397,22 +1397,22 @@ class blaze(commands.Cog):
                 await ctx.send(poke)
                 c.execute(f"update Owned_Pokes set item='{item}' where Number_Caught={select} and Owner={ctx.author.id}")
                 conn.commit()
-                                        
-                     
+
+
         if("Mega-" in name):
-            await ctx.send("You cannot equip items to a mega pokemon!")        
+            await ctx.send("You cannot equip items to a mega pokemon!")
         if(haveitem == False):
             await ctx.send(f"You do not have any {item}'s")
-        c.close()     
+        c.close()
     @commands.command(name='donate' , aliases=["d"])
     async def donate(self, ctx):
         await ctx.send("https://ko-fi.com/S6S6QTB5")
-    @commands.command(name='redeem' , aliases=["r"])   
+    @commands.command(name='redeem' , aliases=["r"])
     @commands.cooldown(1, 180,commands.BucketType.user)
     async def redeem(self, ctx, redeemable:str):
         author=ctx.author.id
         a=ctx.author
-        conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
+        conn = sqlite3.connect('/root/blazibot/blazedb.db')
         c = conn.cursor()
         c.execute(f"select redeems from Players where ID={author}")
         deemamt=c.fetchone()
@@ -1420,7 +1420,7 @@ class blaze(commands.Cog):
         deemamt=deemamt[1:-2]
         await ctx.send(deemamt)
         deemamt=int(str(deemamt))
-        
+
         if redeemable.casefold().capitalize()=='Credits' and deemamt>0:
             try:
                 await bank.deposit_credits(a, 4000)
@@ -1436,7 +1436,7 @@ class blaze(commands.Cog):
                 return True
             await ctx.send("you have redeemed 4000 credits!")
             deems=int(deemamt)-1
-            conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
+            conn = sqlite3.connect('/root/blazibot/blazedb.db')
             c = conn.cursor()
             c.execute(f"update Players set redeems={int(deems)} where ID={author}")
             conn.commit()
@@ -1446,7 +1446,7 @@ class blaze(commands.Cog):
             item=str(item)
             item=item.replace("-redeem i ","")
             await ctx.send(item)
-            conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
+            conn = sqlite3.connect('/root/blazibot/blazedb.db')
             c = conn.cursor()
             c.execute(f"select name from shop")
             itemlist=c.fetchall()
@@ -1457,8 +1457,8 @@ class blaze(commands.Cog):
             itemlist=itemlist.replace("]","")
             itemlist=itemlist.replace(",,",",")
             itemlist=itemlist.replace("'","")
-            
-                
+
+
             if item in itemlist or 'Ultra-candy' in item:
                 selecteditem=item.casefold()
                 c.execute(f"select number from Pokes where Name='{str(redeemable)}'")
@@ -1471,14 +1471,14 @@ class blaze(commands.Cog):
                 deemamt=deemamt[1:-2]
                 if 'Ultra-candy' in item:
                     deems=int(deemamt)-3
-                else:     
-                    deems=int(deemamt)-1 
+                else:
+                    deems=int(deemamt)-1
                 c.execute(f"update Players set redeems={int(deems)} where ID={author}")
                 conn.commit()
                 c.execute(f"select number from items where name='{item}' and Owner={ctx.author.id}")
                 num=c.fetchone()
                 num=str(num)
-        
+
                 if "None" in num:
                     c.execute(f"insert into items(Owner,name,number) Values({ctx.author.id},'{item}',1);")
                     conn.commit()
@@ -1491,10 +1491,10 @@ class blaze(commands.Cog):
                 c.close()
             else:
                 await ctx.send("That item does not exist")
-                
-                
+
+
         else:
-            conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
+            conn = sqlite3.connect('/root/blazibot/blazedb.db')
             c = conn.cursor()
             c.execute(f"select number from Pokes where Name='{str(redeemable)}'")
             deemedpoke=c.fetchone()
@@ -1505,17 +1505,17 @@ class blaze(commands.Cog):
             deemamt=str(deemamt)
             deemamt=deemamt[1:-2]
             await ctx.send(f" You are trying to redeem a {deemedpoke}")
-            
+
             if deemedpoke.isdigit()== False or '1010' in deemedpoke or '3030' in deemedpoke:
                 await ctx.send("That pokemon doesn't exist!")
             elif deemamt<='0':
                 await ctx.send(str(deemamt))
                 await ctx.send("You dont have any redeems!")
             elif "Mega-" in redeemable:
-                await ctx.send("You cannot redeem a mega!")    
+                await ctx.send("You cannot redeem a mega!")
             else:
-                
-                conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
+
+                conn = sqlite3.connect('/root/blazibot/blazedb.db')
                 c = conn.cursor()
                 level=5
                 hp=rand.randint(0,31)
@@ -1568,16 +1568,16 @@ class blaze(commands.Cog):
                 ability=abilities[randabil]
                 c.execute(f"INSERT into Owned_Pokes(ID_Owned , poke_id , level , Number_Caught , HP , Atk , Def , Sp_Atk , Sp_Def , Speed , Ev1 , Ev2 , Ev3 , Ev4 , Ev5 , Ev6 , FORM , Owner,EXP,move1,move2,move3,move4,gender,item,Nature,Natures,shiny,ability,friendship  ) VALUES({newnumberofpokes},{deemedpoke},{level},{newnumberofpokes},{hp},{atk},{df},{sp_atk},{sp_def},{speed},0,0,0,0,0,0,0,{author},0,'','','','','{gender}','{itemdrop}','{nature}','None','{shiny}','{ability}',0);")
                 conn.commit()
-                deems=int(deemamt)-1 
+                deems=int(deemamt)-1
                 await ctx.send(str(deems))
                 c.execute(f"update Players set redeems={int(deems)} where ID={author}")
                 conn.commit()
                 c.close()
-                
+
     @commands.command(name='deem' , aliases=["dmp"])
     @checks.is_owner()
     async def deem(self,ctx,person:discord.Member,amt:int,creds:int):
-        conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
+        conn = sqlite3.connect('/root/blazibot/blazedb.db')
         c = conn.cursor()
         c.execute(f"select redeems from Players where ID={person.id}")
         deems1=c.fetchone()
@@ -1593,39 +1593,39 @@ class blaze(commands.Cog):
             conn.commit()
             await bank.deposit_credits(person, creds)
         c.close()
-    
 
-        
+
+
     @commands.command(name='kenseionly' , aliases=["ko"])
     @checks.is_owner()
     async def kenseionly(self, ctx, poke,player:discord.Member,hp,atk,df,sp_atk,sp_df,speed,shiny:str):
-        conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
+        conn = sqlite3.connect('/root/blazibot/blazedb.db')
         c = conn.cursor()
-        
+
         pokenum=poke
         if 'T' in shiny:
             pokenum=poke+'-shiny'
-        
+
         c.execute(f"Select Name from pokes where Number={poke}")
         spawnpokes=c.fetchone()
         spawnpokes=str(spawnpokes)
         spawnpokes[4:-2]
         spawnedpoke=spawnpokes
-        spawnedpoke=spawnedpoke[2:-3]    
+        spawnedpoke=spawnedpoke[2:-3]
         await ctx.send(spawnedpoke)
         await ctx.send(f"http://157.245.8.88/html/dex/media/pokemon/sugimori/{pokenum}.png")
-        
-       
-        conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
+
+
+        conn = sqlite3.connect('/root/blazibot/blazedb.db')
         c = conn.cursor()
         c.execute(f"SELECT Number_Caught FROM Owned_Pokes WHERE owner={player.id}")
-                       
+
         numberofpokes=c.fetchall()
         c.close()
         noofpokes=len(numberofpokes)
         newnumberofpokes=noofpokes+1
-        conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
-              
+        conn = sqlite3.connect('/root/blazibot/blazedb.db')
+
         await ctx.send('Did you catch it?')
         c = conn.cursor()
         c.execute(f"INSERT into Owned_Pokes(ID_Owned , poke_id , level , Number_Caught , HP , Atk , Def , Sp_Atk , Sp_Def , Speed , Ev1 , Ev2 , Ev3 , Ev4 , Ev5 , Ev6 , FORM , Owner,EXP,move1,move2,move3,move4,shiny  ) VALUES({newnumberofpokes},{poke},5,{newnumberofpokes},{hp},{atk},{df},{sp_atk},{sp_df},{speed},0,0,0,0,0,0,0,{player.id},'0','','','','','{shiny}');");
@@ -1634,7 +1634,7 @@ class blaze(commands.Cog):
         c.close()
         await ctx.send("You caught it!")
     @commands.command(name='buy' , aliases=["b"])
-    async def buy(self, ctx, item):   
+    async def buy(self, ctx, item):
         buychoice=ctx.message
         buychoice=str(buychoice.content)
         buychoice=buychoice.replace("-buy ","")
@@ -1649,7 +1649,7 @@ class blaze(commands.Cog):
                 numi=1
             else:
                 numi=int(options[2])
-            conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
+            conn = sqlite3.connect('/root/blazibot/blazedb.db')
             c = conn.cursor()
             c.execute(f"select cost from shop where name='{item.capitalize()}'")
             costs=c.fetchone()
@@ -1662,7 +1662,7 @@ class blaze(commands.Cog):
             c.execute(f"select number from items where name='{item}' and Owner={ctx.author.id}")
             num=c.fetchone()
             num=str(num)
-        
+
             if "None" in num:
                 c.execute(f"insert into items(Owner,name,number) Values({ctx.author.id},'{item}',{numi});")
                 conn.commit()
@@ -1673,23 +1673,23 @@ class blaze(commands.Cog):
                 conn.commit()
             await ctx.send(f"You bought {numi} "+item)
             c.close()
-        
-            
+
+
     @commands.command(name='about' , aliases=["a"])
     async def about(self, ctx, num):
-        conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
-        c = conn.cursor()   
+        conn = sqlite3.connect('/root/blazibot/blazedb.db')
+        c = conn.cursor()
         if(0==0):
             nu=num
             if nu.isdigit()==True or '-' in nu:
                 c.execute(f"select Number,Name,Type,HP,Attack,Defense,Sp_Atk,Sp_Def,Speed from Pokes where Number={nu}")
                 info=c.fetchall()
-                
-                
+
+
             else:
                 c.execute(f"select Number,Name,Type,HP,Attack,Defense,Sp_Atk,Sp_Def,Speed from Pokes where Name='{nu.capitalize()}'")
                 info=c.fetchall()
-            
+
             info=str(info)
             info=info.replace(")","").replace("(","").replace("]","").replace("[","").replace("'","").replace(",,",",")
             infos=info.split(',')
@@ -1698,27 +1698,27 @@ class blaze(commands.Cog):
             titles=["Number","Name","Type","HP","Attack","Defense","Sp_Atk","Sp_Def","Speed"]
             i=infos
             s=f"""
-            
+
   ----------------------
- |  Hp | {i[3]} | Atk | {i[4]} | 
+ |  Hp | {i[3]} | Atk | {i[4]} |
  | Def | {i[5]} | SAk | {i[6]} |
  | SDf | {i[7]} | Spd | {i[8]} |
   -----------------------
             """
-            embed.add_field(name='Number' , value=i[0], inline=True)    
+            embed.add_field(name='Number' , value=i[0], inline=True)
             embed.add_field(name='Name' , value=i[1], inline=True)
-            embed.add_field(name='Type' , value=str(re.findall('[A-Z][^A-Z]*',i[2])).replace("(","").replace(")","").replace("[","").replace("]","").replace(",","/").replace("'","").replace(" ",""), inline=True)        
+            embed.add_field(name='Type' , value=str(re.findall('[A-Z][^A-Z]*',i[2])).replace("(","").replace(")","").replace("[","").replace("]","").replace(",","/").replace("'","").replace(" ",""), inline=True)
             embed.add_field(name='Stats' , value=s, inline=True)
-                
+
             if 'shiny' not in ctx.message.content:
                 img=infos[0]
             else:
                 img=infos[0]+'-shiny'
             embed.set_thumbnail(url=f"http://157.245.8.88/html/dex/media/pokemon/sugimori/{img}.png")
-            
+
             types=infos[2]
             t=re.findall('[A-Z][^A-Z]*',types)
-            
+
             c.execute(f"select * from typeadv where attacking like '{str(t[0])}'")
             type1=c.fetchall()
             type1=str(type1).replace("(","").replace(")","").replace("[","").replace("]","").replace(",,",",")
@@ -1771,7 +1771,7 @@ class blaze(commands.Cog):
                         im=a
                     else:
                         im=im+', '+a
-                
+
             if str(superweak)=='[]':
                 sw="None"
             else:
@@ -1780,7 +1780,7 @@ class blaze(commands.Cog):
                         sw=a
                     else:
                         sw=sw+', '+a
-                
+
             if str(weak)=='[]':
                 w="None"
             else:
@@ -1819,16 +1819,16 @@ class blaze(commands.Cog):
             embed.add_field(name='Neutral' , value=str(h), inline=False)
             embed.add_field(name='Strong' , value=str(s), inline=False)
             embed.add_field(name='4x' , value=str(ss), inline=False)
-       
+
             await ctx.send(embed=embed)
 
-            
+
         else:
             await ctx.send("Please try again")
     @commands.command(name='information' , aliases=["i"])
     async def information(self, ctx, num):
-        conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
-        c = conn.cursor()    
+        conn = sqlite3.connect('/root/blazibot/blazedb.db')
+        c = conn.cursor()
         if "n" in num or "new" in num or "latest" in num:
             c.execute(f"select Number_Caught from Owned_pokes where Owner={ctx.author.id}")
             numofpokes=c.fetchall()
@@ -1841,12 +1841,12 @@ class blaze(commands.Cog):
             pokelist=numofpokes.split(',')
             pokelen=len(pokelist)
             pokecaught=pokelen-1
-            
+
             c.execute(f"select poke_id from Owned_Pokes where Number_Caught={pokecaught} and Owner={ctx.author.id}")
             pokenum=c.fetchone()
             pokenum=str(pokenum)
             pokenum=pokenum[1:-2]
-            
+
             poke=int(pokenum)
         elif "s" in num or "selected" in num:
             c.execute(f"select selected from Players where ID={ctx.author.id}")
@@ -1857,7 +1857,7 @@ class blaze(commands.Cog):
             c.execute(f"select poke_id from Owned_Pokes where Number_Caught={pokecaught} and Owner={ctx.author.id}")
             pokenum=c.fetchone()
             pokenum=str(pokenum)
-            
+
             pokenum=pokenum[1:-2]
             poke=int(pokenum)
         else:
@@ -1969,14 +1969,14 @@ class blaze(commands.Cog):
                 speedpower=speedpower*1.1
             if 'Speed' in decreases:
                 speedpower=speedpower*0.9
-        
+
         if "Mega" in name:
             poke=str(poke)
             poke=poke[:-3]
             poke=poke+"000"
         if(int(level)<5):
             name="Egg"
-            
+
         if (int(level)<5):
             poke='egg'
         if('T' in str(shiny)):
@@ -1998,9 +1998,9 @@ class blaze(commands.Cog):
 
 |------STATS-------|
 
-  Hp | {hp} | {hpiv} | {hpev} | 
-  Atk | {atk} | {atkiv} | {atkev} | 
-  Def | {df} | {defiv} | {defev} | 
+  Hp | {hp} | {hpiv} | {hpev} |
+  Atk | {atk} | {atkiv} | {atkev} |
+  Def | {df} | {defiv} | {defev} |
   SAk | {satk} | {sp_atkiv} | {sp_atkev} |
   SDf | {sdef} | {sp_defiv} | {sp_defev} |
   Spd | {spd} | {speediv} | {speedev} |
@@ -2008,7 +2008,7 @@ class blaze(commands.Cog):
         embed = discord.Embed(title=f"{str(pokecaught)}  {name} {nick}", description=info, color=0x00ff00)
         embed.set_image(url=f"http://157.245.8.88/html/dex/media/pokemon/sugimori/{str(poke)}.png")
         embed.set_thumbnail(url=ctx.author.avatar_url)
-                   
+
         try:
             await ctx.send(embed=embed)
         except:
@@ -2016,8 +2016,8 @@ class blaze(commands.Cog):
         c.close()
     @commands.command(name='nickname' , aliases=["n","nick"])
     async def nickname(self, ctx,name:str):
-        conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
-        c = conn.cursor()  
+        conn = sqlite3.connect('/root/blazibot/blazedb.db')
+        c = conn.cursor()
         c.execute(f"select selected from Players where ID={ctx.author.id}")
         selected=c.fetchone()
         selected = str(selected)
@@ -2026,10 +2026,10 @@ class blaze(commands.Cog):
         c.execute(f"update Owned_Pokes set nick='{name}' where Number_Caught={select} and Owner={ctx.author.id}")
         conn.commit()
         c.close()
-        await ctx.send(f"You have nicknamed your pokemon to {name}!")        
+        await ctx.send(f"You have nicknamed your pokemon to {name}!")
     @commands.command(name='pokes' , aliases=["p","pokemon"])
     async def pokes(self, ctx):
-        conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
+        conn = sqlite3.connect('/root/blazibot/blazedb.db')
         c = conn.cursor()
         c.execute(f"Select Number_Caught from Owned_Pokes where {ctx.author.id}=Owner")
         pokesraw=c.fetchall()
@@ -2087,7 +2087,7 @@ class blaze(commands.Cog):
                 var=""
             pokeinfos=pokeinfos+(str(current)+","+name+","+stuff+totals+"%"+"\n"+var)
             current=current+1
-        
+
         pokeinfos=pokeinfos.replace("Male","♂️")
         pokeinfos=pokeinfos.replace("Female","♀️")
         pokeinfos=pokeinfos.replace("Tranny","⚥")
@@ -2097,13 +2097,13 @@ class blaze(commands.Cog):
         pokeinfos=pokeinfos.replace(",","   ")
         await ctx.send("No.  Name Lv  Nickname  Gender  Shiny  IV %")
         await menu(ctx, pokeinfos.split('.'), DEFAULT_CONTROLS)
-        """Embed.message_length = len(embed)""" 
-        
-        
-        c.close()      
+        """Embed.message_length = len(embed)"""
+
+
+        c.close()
     @commands.command(name='trainer' , aliases=["profile"])
     async def trainer(self, ctx):
-        conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
+        conn = sqlite3.connect('/root/blazibot/blazedb.db')
         c = conn.cursor()
         c.execute(f"select redeems,nick,role,Equipped from Players where ID={ctx.author.id}")
         info1=c.fetchall()
@@ -2120,10 +2120,10 @@ class blaze(commands.Cog):
             l=str(l)
             l=l[35:-2]
             rolelist=rolelist+l+"\n"
-        
 
-        
-        
+
+
+
         pokelen=len(p2)
         pokelen=int(pokelen)/2
         pokelen=str(pokelen)
@@ -2137,10 +2137,10 @@ class blaze(commands.Cog):
         sget=sget.replace("]","")
         sget=sget.replace("'","")
         sget=sget.replace(",,",",")
-        
+
         shinylist=sget.split(',')
         shinies=len(shinylist)-1
-        
+
         embed = discord.Embed(title="-", description="Trainer info", color=0x00ff00)
         embed.set_thumbnail(url=ctx.author.avatar_url)
         embed.add_field(name="Name:" , value=i1[1][2:-1], inline=False)
@@ -2153,7 +2153,7 @@ class blaze(commands.Cog):
         c.close()
     @commands.command(name='filter' , aliases=["f"])
     async def filter(self, ctx):
-        conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
+        conn = sqlite3.connect('/root/blazibot/blazedb.db')
         c = conn.cursor()
         inputf=ctx.message
         inputf=str(inputf.content)
@@ -2219,7 +2219,7 @@ class blaze(commands.Cog):
                     stuff=stuff.replace("Male","♂️")
                     stuff=stuff.replace("Female","♀️")
                     stuff=stuff.replace("Tranny","⚥")
-                        
+
                     stuff=stuff.replace("True","<:shinysm:630772825086754858>")
                     stuff=stuff.replace("False","<:pknorm:630748557280018443>")
                     if current%24==1:
@@ -2254,7 +2254,7 @@ class blaze(commands.Cog):
                         numlist.append(n)
                 if len(numlist)>1:
                     for d in numlist:
-                    
+
                         if '"' not in d:
                             c.execute(f"select poke_id from Owned_Pokes where Number_Caught={d} and Owner={ctx.author.id}")
                             num=c.fetchone()
@@ -2276,17 +2276,17 @@ class blaze(commands.Cog):
                             stuff=stuff.replace("'","")
                             if count%24==1:
                                 shiny=shiny+d+"   "+name+" "+stuff+"."+','
-                            else:                            
+                            else:
                                 shiny=shiny+d+"   "+name+" "+stuff+','
                             count=count+1
                             shiny=shiny.replace("Male","♂️")
                             shiny=shiny.replace("Female","♀️")
                             shiny=shiny.replace("Tranny","⚥")
-                            
+
                             shiny=shiny.replace("True","<:shinysm:630772825086754858>")
                             shiny=shiny.replace("False","<:pknorm:630748557280018443>")
                     await menu(ctx, shiny.replace(',','\n').split('.'), DEFAULT_CONTROLS)
- 
+
                 else:
                     await ctx.send("You have no legendaries!")
             elif 'iv' in filters[1].lower():
@@ -2347,7 +2347,7 @@ class blaze(commands.Cog):
                 completelist[1].append(sortedlist)
                 await ctx.send(str(completelist))
                 await ctx.send(str(completelist[1][1]))
-                    
+
             elif 'name' in filters[1] or 'Name' in filters[1] or 'n' in filters[1] or 'N' in filters[1]:
                 await ctx.send(f"filtering your pokemon for {filters[2]}!")
                 c.execute(f"select Number from Pokes where Name='{filters[2]}'")
@@ -2362,7 +2362,7 @@ class blaze(commands.Cog):
                 names=int(name)
                 shiny=""
                 c.execute(f"select Number_Caught from Owned_Pokes where Owner={ctx.author.id} and poke_id={names}")
-    
+
                 shinylist=c.fetchall()
                 shinylist=str(shinylist)
                 shinylist=shinylist.replace("[","")
@@ -2375,7 +2375,7 @@ class blaze(commands.Cog):
                 shinyselected=shinylist.split(',')
                 count=0
                 for d in shinyselected:
-                    
+
                     if '"' not in d:
                         c.execute(f"select poke_id from Owned_Pokes where Number_Caught={d} and Owner={ctx.author.id}")
                         num=c.fetchone()
@@ -2397,13 +2397,13 @@ class blaze(commands.Cog):
                         stuff=stuff.replace("'","")
                         if count%24==1:
                             shiny=shiny+d+"   "+name+" "+stuff+"."+','
-                        else:                            
+                        else:
                             shiny=shiny+d+"   "+name+" "+stuff+','
                         count=count+1
                         shiny=shiny.replace("Male","♂️")
                         shiny=shiny.replace("Female","♀️")
                         shiny=shiny.replace("Tranny","⚥")
-                        
+
                         shiny=shiny.replace("True","<:shinysm:630772825086754858>")
                         shiny=shiny.replace("False","<:pknorm:630748557280018443>")
                 await menu(ctx, shiny.replace(',','\n').split('.'), DEFAULT_CONTROLS)
@@ -2411,7 +2411,7 @@ class blaze(commands.Cog):
                 shiny=" "
                 await ctx.send(f"filtering your pokemon for Shiny Pokes!")
                 c.execute(f"select Number_Caught from Owned_Pokes where Owner={ctx.author.id} and Shiny='True'")
-    
+
                 shinylist=c.fetchall()
                 shinylist=str(shinylist)
                 shinylist=shinylist.replace("[","")
@@ -2424,7 +2424,7 @@ class blaze(commands.Cog):
                 shinyselected=shinylist.split(',')
                 count=0
                 for d in shinyselected:
-                    
+
                     if '"' not in d:
                         c.execute(f"select poke_id from Owned_Pokes where Number_Caught={d} and Owner={ctx.author.id}")
                         num=c.fetchone()
@@ -2446,13 +2446,13 @@ class blaze(commands.Cog):
                         stuff=stuff.replace("'","")
                         if count%24==1:
                             shiny=shiny+d+"   "+name+" "+stuff+"."+','
-                        else:                            
+                        else:
                             shiny=shiny+d+"   "+name+" "+stuff+','
                         count=count+1
                         shiny=shiny.replace("Male","♂️")
                         shiny=shiny.replace("Female","♀️")
                         shiny=shiny.replace("Tranny","⚥")
-                        
+
                         shiny=shiny.replace("True","<:shinysm:630772825086754858>")
                         shiny=shiny.replace("False","<:pknorm:630748557280018443>")
                 await menu(ctx, shiny.replace(',','\n').split('.'), DEFAULT_CONTROLS)
@@ -2460,7 +2460,7 @@ class blaze(commands.Cog):
                 shiny=" "
                 await ctx.send(f"filtering your pokemon for Mega Pokes!")
                 c.execute(f"select Number_Caught from Owned_Pokes where Owner={ctx.author.id} and item='mega-stone'")
-    
+
                 shinylist=c.fetchall()
                 shinylist=str(shinylist)
                 shinylist=shinylist.replace("[","")
@@ -2473,7 +2473,7 @@ class blaze(commands.Cog):
                 shinyselected=shinylist.split(',')
                 count=0
                 for d in shinyselected:
-                    
+
                     if '"' not in d:
                         c.execute(f"select poke_id from Owned_Pokes where Number_Caught={d} and Owner={ctx.author.id}")
                         num=c.fetchone()
@@ -2497,7 +2497,7 @@ class blaze(commands.Cog):
                             if 'Mega' in name:
                                 shiny=shiny+d+"   "+name+" "+stuff+"."+','
                         else:
-                            if 'Mega' in name:                            
+                            if 'Mega' in name:
                                 shiny=shiny+d+"   "+name+" "+stuff+','
                         count=count+1
                         shiny=shiny.replace("Male","♂️")
@@ -2505,13 +2505,13 @@ class blaze(commands.Cog):
                         shiny=shiny.replace("Tranny","⚥")
                         shiny=shiny.replace("True","<:shinysm:630772825086754858>")
                         shiny=shiny.replace("False","<:pknorm:630748557280018443>")
-                
-                await menu(ctx, shiny.replace(',','\n').split('.'), DEFAULT_CONTROLS)            
+
+                await menu(ctx, shiny.replace(',','\n').split('.'), DEFAULT_CONTROLS)
             elif 'gender' in filters[1] or 'Gender' in filters[1] or 'g' in filters[1] or 'G' in filters[1]:
                 shiny=" "
                 await ctx.send(f"filtering your pokemon for {filters[2]} Pokes!")
                 c.execute(f"select Number_Caught from Owned_Pokes where Owner={ctx.author.id} and gender='Male'")
-    
+
                 shinylist=c.fetchall()
                 shinylist=str(shinylist)
                 shinylist=shinylist.replace("[","")
@@ -2524,7 +2524,7 @@ class blaze(commands.Cog):
                 shinyselected=shinylist.split(',')
                 count=0
                 for d in shinyselected:
-                    
+
                     if '"' not in d:
                         c.execute(f"select poke_id from Owned_Pokes where Number_Caught={d} and Owner={ctx.author.id}")
                         num=c.fetchone()
@@ -2546,7 +2546,7 @@ class blaze(commands.Cog):
                         stuff=stuff.replace("'","")
                         if count%24==1:
                             shiny=shiny+d+"   "+name+" "+stuff+"."+','
-                        else:                            
+                        else:
                             shiny=shiny+d+"   "+name+" "+stuff+','
                         count=count+1
                         shiny=shiny.replace("Male","♂️")
@@ -2554,7 +2554,7 @@ class blaze(commands.Cog):
                         shiny=shiny.replace("Tranny","⚥")
                         shiny=shiny.replace("True","<:shinysm:630772825086754858>")
                         shiny=shiny.replace("False","<:pknorm:630748557280018443>")
-                
+
                 await menu(ctx, shiny.replace(',','\n').split('.'), DEFAULT_CONTROLS)
         elif 'm' in filters[0] or 'M' in filters[0] or 'market' in filters[0] or 'Market' in filters[0] or 'gts' in filters[0] or 'GTS' in filters[0]:
             if 'type' in filters[1] or 'Type' in filters[1]:
@@ -2564,11 +2564,11 @@ class blaze(commands.Cog):
     @commands.command(name='form' , aliases=["change"])
     async def form(self, ctx, form:str):
         await ctx.send("You can change forms this way")
-        conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
+        conn = sqlite3.connect('/root/blazibot/blazedb.db')
         c = conn.cursor()
-        
+
         if(form=="mega"):
-            
+
             await ctx.send("Checking for a mega-stone on your selected pokemon.")
             c.execute(f"select selected from Players where ID={ctx.author.id}")
             selected=c.fetchone()
@@ -2590,16 +2590,16 @@ class blaze(commands.Cog):
                     meganame=str(meganame)
                     meganame=meganame[2:-3]
                     await ctx.send(meganame)
-            
+
                     c.execute(f"update Owned_Pokes set poke_id={pokeid+'000'} where poke_id={pokeid} and Owner={ctx.author.id} and Number_Caught={selected}")
                     conn.commit()
-        
+
                     await ctx.send("You pokemon has Meg-Evolved to "+meganame)
                 else:
                     await ctx.send("You cannot mega-evolve this pokemon!")
             else:
                 await ctx.send("You dont have a mega stone equipped!")
-            
+
         elif(form=="mega-x"):
             await ctx.send("Checking for a mega-x-stone on your selected pokemon.")
             await ctx.send("Checking for a mega-stone on your selected pokemon.")
@@ -2624,7 +2624,7 @@ class blaze(commands.Cog):
                 await ctx.send(meganame)
                 c.execute(f"update Owned_Pokes set poke_id={pokeid+'001'} where poke_id={pokeid} and Owner={ctx.author.id}")
                 conn.commit()
-        
+
                 await ctx.send("You pokemon has Meg-Evolved to "+meganame)
             else:
                 await ctx.send("You dont have a mega x stone equipped!")
@@ -2652,14 +2652,14 @@ class blaze(commands.Cog):
                 await ctx.send(meganame)
                 c.execute(f"update Owned_Pokes set poke_id={pokeid+'002'} where poke_id={pokeid} and Owner={ctx.author.id}")
                 conn.commit()
-        
+
                 await ctx.send("You pokemon has Meg-Evolved to "+meganame)
             else:
                 await ctx.send("You dont have a mega y stone equipped!")
         if(form=="stone"):
             await ctx.send("Working on stone evos")
         if(form=="alolan"):
-            
+
             await ctx.send("Checking for a alolan-stone on your selected pokemon.")
             c.execute(f"select selected from Players where ID={ctx.author.id}")
             selected=c.fetchone()
@@ -2688,7 +2688,7 @@ class blaze(commands.Cog):
                 newnum=newnum[1:-2]
                 await ctx.send(newnum)
                 c.execute(f"update Owned_Pokes set poke_id={newnum} where Number_Caught={selected} and Owner={ctx.author.id}")
-                conn.commit()      
+                conn.commit()
                 await ctx.send("You have converted your pokemon to an alolan form!")
         elif(form=="change"):
             await ctx.send("Looking for alternate forms for your selected pokemon.")
@@ -2697,19 +2697,19 @@ class blaze(commands.Cog):
         c.close()
     @commands.command(name='select' , aliases=["sp"])
     async def select(self, ctx,pokenum:int):
-        conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
+        conn = sqlite3.connect('/root/blazibot/blazedb.db')
         c = conn.cursor()
         c.execute(f"Select poke_id from Owned_Pokes where {pokenum}= Number_Caught AND {ctx.author.id}=Owner")
         pid=c.fetchone()
         pid=str(pid)
         pid=pid[1:-2]
         c.close()
-        conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
+        conn = sqlite3.connect('/root/blazibot/blazedb.db')
         c = conn.cursor()
         c.execute(f"select Name from Pokes where Number={pid}")
         name=c.fetchone()
         name=str(name)
-       
+
         c.execute(f"select Level from Owned_Pokes where Number_Caught={pokenum} AND {ctx.author.id}=Owner")
         lv=c.fetchone()
         lv=str(lv)
@@ -2718,7 +2718,7 @@ class blaze(commands.Cog):
         if int(lv)<5:
             name=  "egg"
         c.close()
-        conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
+        conn = sqlite3.connect('/root/blazibot/blazedb.db')
         c = conn.cursor()
         c.execute(f"Update Players set selected={pokenum} where ID={ctx.author.id}")
         conn.commit()
@@ -2726,7 +2726,7 @@ class blaze(commands.Cog):
         name=name.replace(")","")
         name=name.replace("'","")
         name=name.replace(",","")
-        c.close()     
+        c.close()
         await ctx.send(f"You have selected your {name}!")
         c.close()
     @commands.command(name='party' , aliases=["team"])
@@ -2734,7 +2734,7 @@ class blaze(commands.Cog):
         if 'add' in target:
             await ctx.send('You can add pokemon this way!')
             spot='poke'+str(slot)
-            conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
+            conn = sqlite3.connect('/root/blazibot/blazedb.db')
             c = conn.cursor()
             c.execute(f"Select selected from Players where ID='{ctx.author.id}'")
             selected=c.fetchone()
@@ -2749,14 +2749,14 @@ class blaze(commands.Cog):
             else:
                 c.execute(f"Update Players set {spot}={selected} where ID='{ctx.author.id}'")
             conn.commit()
-            c.close() 
-            
+            c.close()
+
         elif 'show' in target:
-            conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
+            conn = sqlite3.connect('/root/blazibot/blazedb.db')
             c = conn.cursor()
             c.execute(f"select poke1,poke2,poke3,poke4,poke5,poke6 from Players where ID='{ctx.author.id}'")
             team =c.fetchall()
-       
+
             team=str(team)
             team =team[2:-2]
             pokes=team.split(',')
@@ -2805,7 +2805,7 @@ class blaze(commands.Cog):
                 poke02=str(poke02)
                 poke02=poke02[2:-3]
                 print(poke02)
-            if(poke3 != 'o'):               
+            if(poke3 != 'o'):
                 c.execute(f"select Name from pokes where Number={poke3}")
                 poke03 = c.fetchone()
                 poke03=str(poke03)
@@ -2836,7 +2836,7 @@ class blaze(commands.Cog):
                     ---------------------------
                    |  {poke04+pokes[3]}  |  {poke05+pokes[4]}  |  {poke06+pokes[5]}  |
                     ```"""
-            
+
             embed = discord.Embed(title="-", description="Party", color=0x00ff00)
             embed.set_thumbnail(url=ctx.author.avatar_url)
             embed.add_field(name="Poke 1:" , value=poke01+"   #"+pokes[0] , inline=True)
@@ -2851,10 +2851,10 @@ class blaze(commands.Cog):
         c.close()
     @commands.command(name='breed' , aliases=["pokesex"])
     @commands.cooldown(1, 180,commands.BucketType.user)
-    @charge(amount=350)    
+    @charge(amount=350)
     async def breed(self, ctx, poke1:int,poke2:int):
         await ctx.send(ctx.author.mention+" has paid 350 Blazibucks to the daycare!")
-        conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
+        conn = sqlite3.connect('/root/blazibot/blazedb.db')
         c = conn.cursor()
         c.execute(f"select poke_id from Owned_Pokes where Number_Caught={poke1} and Owner={ctx.author.id}")
         num1=c.fetchone()
@@ -2878,20 +2878,20 @@ class blaze(commands.Cog):
         if shinyrand==0:
             shiny='True'
         else:
-            shiny='False' 
+            shiny='False'
         genderrand=rand.randint(0,1)
         if genderrand==0:
             gender='Male'
         else:
-            gender='Female'        
-        c.execute(f"select gender from Owned_Pokes where Number_Caught={poke1} and Owner={ctx.author.id}")        
+            gender='Female'
+        c.execute(f"select gender from Owned_Pokes where Number_Caught={poke1} and Owner={ctx.author.id}")
         gender1=c.fetchone()
         gender1=str(gender1)
         if 'None' in gender1:
             gender1=gender1[1:-2]
         else:
             gender1=gender1[2:-3]
-        c.execute(f"select gender from Owned_Pokes where Number_Caught={poke2} and Owner={ctx.author.id}")        
+        c.execute(f"select gender from Owned_Pokes where Number_Caught={poke2} and Owner={ctx.author.id}")
         gender2=c.fetchone()
         gender2=str(gender2)
         if 'None' in gender2:
@@ -2951,9 +2951,9 @@ class blaze(commands.Cog):
             sp_def=""
             speed=""
             eventpokes=['Bulbaween','Ivyween','Veenuween','Mimiween']
-            if  'Mega' not in name1 and 'Mega' not in name2 and 'ween' not in name1 and 'ween' not in name2: 
+            if  'Mega' not in name1 and 'Mega' not in name2 and 'ween' not in name1 and 'ween' not in name2:
                 if egg11==egg21 or egg11==egg22 or egg12==egg21 or egg22==egg22 or '-' in egg11 or '-' in egg12 or '-' in egg21 or '-' in egg22:
-                    c.execute(f"select Hp,Atk,Def,Sp_atk,Sp_def,Speed from Owned_Pokes where Number_Caught={poke1} and Owner={ctx.author.id}")        
+                    c.execute(f"select Hp,Atk,Def,Sp_atk,Sp_def,Speed from Owned_Pokes where Number_Caught={poke1} and Owner={ctx.author.id}")
                     ivs1=c.fetchall()
                     ivs1=str(ivs1)
                     ivs1=ivs1.replace("(","")
@@ -2963,7 +2963,7 @@ class blaze(commands.Cog):
                     ivs1=ivs1.replace(" ","")
                     ivs1=ivs1.replace(",,",",")
                     stats1=ivs1.split(',')
-                    c.execute(f"select Hp,Atk,Def,Sp_atk,Sp_def,Speed from Owned_Pokes where Number_Caught={poke2} and Owner={ctx.author.id}")        
+                    c.execute(f"select Hp,Atk,Def,Sp_atk,Sp_def,Speed from Owned_Pokes where Number_Caught={poke2} and Owner={ctx.author.id}")
                     ivs2=c.fetchall()
                     ivs2=str(ivs2)
                     ivs2=ivs2.replace("(","")
@@ -2973,11 +2973,11 @@ class blaze(commands.Cog):
                     ivs2=ivs2.replace(" ","")
                     ivs2=ivs2.replace(",,",",")
                     stats2=ivs2.split(',')
-                    c.execute(f"select item from Owned_Pokes where Number_Caught={poke1} and Owner={ctx.author.id}")   
+                    c.execute(f"select item from Owned_Pokes where Number_Caught={poke1} and Owner={ctx.author.id}")
                     item1=c.fetchone()
                     item1=str(item1)
                     item1=item1[2:-3]
-                    c.execute(f"select item from Owned_Pokes where Number_Caught={poke2} and Owner={ctx.author.id}")   
+                    c.execute(f"select item from Owned_Pokes where Number_Caught={poke2} and Owner={ctx.author.id}")
                     item2=c.fetchone()
                     item2=str(item2)
                     item2=item2[2:-3]
@@ -3025,7 +3025,7 @@ class blaze(commands.Cog):
                             atk=stats1[1]
                         if 2 in newivs:
 
-                            df=stats1[2] 
+                            df=stats1[2]
                         if 3 in newivs:
 
                             sp_atk=stats1[3]
@@ -3037,7 +3037,7 @@ class blaze(commands.Cog):
                             speed=stats1[5]
                         if 0 not in newivs:
 
-                            hp=rand.randint(0,31) 
+                            hp=rand.randint(0,31)
                         if 1 not in newivs:
 
                             atk=rand.randint(0,31)
@@ -3053,7 +3053,7 @@ class blaze(commands.Cog):
                         if 5 not in newivs:
 
                             speed=rand.randint(0,31)
-                        
+
                         c.execute(f"SELECT Number_Caught FROM Owned_Pokes WHERE owner={ctx.author.id}")
                         numberofpokes=c.fetchall()
                         noofpokes=len(numberofpokes)
@@ -3083,7 +3083,7 @@ class blaze(commands.Cog):
                                             s=s
                                         else:
                                             stch=rand.randint(0,5)
-                                            
+
                                             s=int(s)-stch
                                             s=str(s)
                                             at.append(s)
@@ -3100,59 +3100,59 @@ class blaze(commands.Cog):
                             else:
                                 await ctx.send("You cannot breed an egg!")
                         else:
-                            await ctx.send("you cannot breed a mega!")                        
+                            await ctx.send("you cannot breed a mega!")
                     if breedchance==1 and dstat==True:
                         newivs=rand.sample(range(6),5)
                         totalmale=4
                         totalfemale=1
                         currentmale=0
                         currentfemale=0
-                     
+
                         if 0 in newivs:
-                            
+
                             genderpass=rand.randint(0,1)
-                            if genderpass==0 and currentmale<=totalmale: 
+                            if genderpass==0 and currentmale<=totalmale:
                                 hp=stats1[0]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<=totalfemale:
-                                hp=stats2[0]              
+                                hp=stats2[0]
                         if 1 in newivs:
                             genderpass=rand.randint(0,1)
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 atk=stats1[1]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                atk=stats2[1] 
+                                atk=stats2[1]
                         if 2 in newivs:
                             genderpass=rand.randint(0,1)
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 df=stats1[2]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                df=stats2[2] 
+                                df=stats2[2]
                         if 3 in newivs:
                             genderpass=rand.randint(0,1)
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 sp_atk=stats1[3]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                sp_atk=stats2[3] 
+                                sp_atk=stats2[3]
                         if 4 in newivs:
                             genderpass=rand.randint(0,1)
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 sp_def=stats1[4]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                sp_def=stats2[4] 
+                                sp_def=stats2[4]
                         if 5 in newivs:
                             genderpass=rand.randint(0,1)
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 speed=stats1[5]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                speed=stats2[5] 
+                                speed=stats2[5]
                         if 0 not in newivs:
-                            hp=rand.randint(0,31) 
+                            hp=rand.randint(0,31)
                         if 1 not in newivs:
                             atk=rand.randint(0,31)
                         if 2 not in newivs:
@@ -3193,78 +3193,78 @@ class blaze(commands.Cog):
                                             s=s
                                         else:
                                             stch=rand.randint(0,5)
-                                            
+
                                             s=int(s)-stch
                                             s=str(s)
                                     else:
                                        at.append(s)
-                                
+
                                 hp=at[0]
                                 atk=at[1]
                                 df=at[2]
                                 sp_atk=at[3]
                                 sp_def=at[4]
-                                speed=at[5]     
+                                speed=at[5]
                                 c.execute(f"INSERT into Owned_Pokes(ID_Owned , poke_id , level , Number_Caught , HP , Atk , Def , Sp_Atk , Sp_Def , Speed , Ev1 , Ev2 , Ev3 , Ev4 , Ev5 , Ev6 , FORM , Owner,EXP,move1,move2,move3,move4,shiny,Nature,Ability,gender  ) VALUES({newnumberofpokes},{num2},1,{newnumberofpokes},{hp},{atk},{df},{sp_atk},{sp_def},{speed},0,0,0,0,0,0,0,{ctx.author.id},'0','','','','','{shiny}',{nature},{ability},'{gender}');");
-                                conn.commit()     
+                                conn.commit()
                     if breedchance==2 and dstat==True:
                         newivs=rand.sample(range(6),5)
                         totalmale=4
                         totalfemale=1
                         currentmale=0
                         currentfemale=0
-                         
+
                         if 0 in newivs:
 
                             genderpass=rand.randint(0,1)
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 hp=stats1[0]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                hp=stats2[0]              
+                                hp=stats2[0]
                         if 1 in newivs:
-                            
+
                             genderpass=rand.randint(0,1)
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 atk=stats1[1]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                atk=stats2[1] 
+                                atk=stats2[1]
                         if 2 in newivs:
                             genderpass=rand.randint(0,1)
-                            
-                            if genderpass==0 and currentmale<totalmale+1: 
+
+                            if genderpass==0 and currentmale<totalmale+1:
                                 df=stats1[2]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                df=stats2[2] 
+                                df=stats2[2]
                         if 3 in newivs:
                             genderpass=rand.randint(0,1)
 
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 sp_atk=stats1[3]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                sp_atk=stats2[3] 
+                                sp_atk=stats2[3]
                         if 4 in newivs:
                             genderpass=rand.randint(0,1)
 
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 sp_def=stats1[4]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<=totalfemale:
-                                sp_def=stats2[4] 
+                                sp_def=stats2[4]
                         if 5 in newivs:
                             genderpass=rand.randint(0,1)
 
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 speed=stats1[5]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                speed=stats2[5] 
+                                speed=stats2[5]
                         if 0 not in newivs:
 
-                            hp=rand.randint(0,31) 
+                            hp=rand.randint(0,31)
                         if 1 not in newivs:
 
                             atk=rand.randint(0,31)
@@ -3279,7 +3279,7 @@ class blaze(commands.Cog):
                         if 5 not in newivs:
 
                             speed=rand.randint(0,31)
-                        
+
                         c.execute(f"SELECT Number_Caught FROM Owned_Pokes WHERE owner={ctx.author.id}")
                         numberofpokes=c.fetchall()
                         noofpokes=len(numberofpokes)
@@ -3309,7 +3309,7 @@ class blaze(commands.Cog):
                                             s=s
                                         else:
                                             stch=rand.randint(0,5)
-                                            
+
                                             s=int(s)-stch
                                             s=str(s)
                                             at.append(s)
@@ -3321,68 +3321,68 @@ class blaze(commands.Cog):
                                 sp_atk=at[3]
                                 sp_def=at[4]
                                 speed=at[5]
-                        
+
                                 c.execute(f"INSERT into Owned_Pokes(ID_Owned , poke_id , level , Number_Caught , HP , Atk , Def , Sp_Atk , Sp_Def , Speed , Ev1 , Ev2 , Ev3 , Ev4 , Ev5 , Ev6 , FORM , Owner,EXP,move1,move2,move3,move4,shiny,Nature,Ability,gender  ) VALUES({newnumberofpokes},{num2},1,{newnumberofpokes},{hp},{atk},{df},{sp_atk},{sp_def},{speed},0,0,0,0,0,0,0,{ctx.author.id},'0','','','','','{shiny}',{nature},{ability},'{gender}');");
-                                conn.commit()    
+                                conn.commit()
                     if breedchance==3 and dstat==True:
                         newivs=rand.sample(range(6),5)
-                        await ctx.send(str(newivs)) 
+                        await ctx.send(str(newivs))
                         totalmale=3
                         totalfemale=2
                         currentmale=0
                         currentfemale=0
-                         
+
                         if 0 in newivs:
 
                             genderpass=rand.randint(0,1)
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 hp=stats1[0]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                hp=stats2[0]              
+                                hp=stats2[0]
                         if 1 in newivs:
 
                             genderpass=rand.randint(0,1)
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 atk=stats1[1]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                atk=stats2[1] 
+                                atk=stats2[1]
                         if 2 in newivs:
                             genderpass=rand.randint(0,1)
 
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 df=stats1[2]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                df=stats2[2] 
+                                df=stats2[2]
                         if 3 in newivs:
                             genderpass=rand.randint(0,1)
 
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 sp_atk=stats1[3]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                sp_atk=stats2[3] 
+                                sp_atk=stats2[3]
                         if 4 in newivs:
                             genderpass=rand.randint(0,1)
 
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 sp_def=stats1[4]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<=totalfemale:
-                                sp_def=stats2[4] 
+                                sp_def=stats2[4]
                         if 5 in newivs:
                             genderpass=rand.randint(0,1)
 
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 speed=stats1[5]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                speed=stats2[5] 
+                                speed=stats2[5]
                         if 0 not in newivs:
 
-                            hp=rand.randint(0,31) 
+                            hp=rand.randint(0,31)
                         if 1 not in newivs:
 
                             atk=rand.randint(0,31)
@@ -3398,7 +3398,7 @@ class blaze(commands.Cog):
                         if 5 not in newivs:
 
                             speed=rand.randint(0,31)
-                        
+
                         c.execute(f"SELECT Number_Caught FROM Owned_Pokes WHERE owner={ctx.author.id}")
                         numberofpokes=c.fetchall()
                         noofpokes=len(numberofpokes)
@@ -3428,7 +3428,7 @@ class blaze(commands.Cog):
                                             s=s
                                         else:
                                             stch=rand.randint(0,5)
-                                            
+
                                             s=int(s)-stch
                                             s=str(s)
                                             at.append(s)
@@ -3444,63 +3444,63 @@ class blaze(commands.Cog):
                                 conn.commit()
                     if breedchance==4 and dstat==True:
                         newivs=rand.sample(range(6),5)
-                        await ctx.send(str(newivs)) 
+                        await ctx.send(str(newivs))
                         totalmale=2
                         totalfemale=3
                         currentmale=0
                         currentfemale=0
-                         
+
                         if 0 in newivs:
 
                             genderpass=rand.randint(0,1)
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 hp=stats1[0]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                hp=stats2[0]              
+                                hp=stats2[0]
                         if 1 in newivs:
 
                             genderpass=rand.randint(0,1)
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 atk=stats1[1]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                atk=stats2[1] 
+                                atk=stats2[1]
                         if 2 in newivs:
                             genderpass=rand.randint(0,1)
 
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 df=stats1[2]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                df=stats2[2] 
+                                df=stats2[2]
                         if 3 in newivs:
                             genderpass=rand.randint(0,1)
 
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 sp_atk=stats1[3]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                sp_atk=stats2[3] 
+                                sp_atk=stats2[3]
                         if 4 in newivs:
                             genderpass=rand.randint(0,1)
 
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 sp_def=stats1[4]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<=totalfemale:
-                                sp_def=stats2[4] 
+                                sp_def=stats2[4]
                         if 5 in newivs:
                             genderpass=rand.randint(0,1)
 
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 speed=stats1[5]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                speed=stats2[5] 
+                                speed=stats2[5]
                         if 0 not in newivs:
 
-                            hp=rand.randint(0,31) 
+                            hp=rand.randint(0,31)
                         if 1 not in newivs:
 
                             atk=rand.randint(0,31)
@@ -3516,7 +3516,7 @@ class blaze(commands.Cog):
                         if 5 not in newivs:
 
                             speed=rand.randint(0,31)
-                        
+
                         c.execute(f"SELECT Number_Caught FROM Owned_Pokes WHERE owner={ctx.author.id}")
                         numberofpokes=c.fetchall()
                         noofpokes=len(numberofpokes)
@@ -3546,7 +3546,7 @@ class blaze(commands.Cog):
                                             s=s
                                         else:
                                             stch=rand.randint(0,5)
-                                            
+
                                             s=int(s)-stch
                                             s=str(s)
                                             at.append(s)
@@ -3562,63 +3562,63 @@ class blaze(commands.Cog):
                                 conn.commit()
                     if breedchance==5 and dstat==True:
                         newivs=rand.sample(range(6),5)
-                        await ctx.send(str(newivs)) 
+                        await ctx.send(str(newivs))
                         totalmale=5
                         totalfemale=0
                         currentmale=0
                         currentfemale=0
-                         
+
                         if 0 in newivs:
 
                             genderpass=rand.randint(0,1)
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 hp=stats1[0]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                hp=stats2[0]              
+                                hp=stats2[0]
                         if 1 in newivs:
 
                             genderpass=rand.randint(0,1)
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 atk=stats1[1]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                atk=stats2[1] 
+                                atk=stats2[1]
                         if 2 in newivs:
                             genderpass=rand.randint(0,1)
 
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 df=stats1[2]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                df=stats2[2] 
+                                df=stats2[2]
                         if 3 in newivs:
                             genderpass=rand.randint(0,1)
 
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 sp_atk=stats1[3]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                sp_atk=stats2[3] 
+                                sp_atk=stats2[3]
                         if 4 in newivs:
                             genderpass=rand.randint(0,1)
 
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 sp_def=stats1[4]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<=totalfemale:
-                                sp_def=stats2[4] 
+                                sp_def=stats2[4]
                         if 5 in newivs:
                             genderpass=rand.randint(0,1)
 
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 speed=stats1[5]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                speed=stats2[5] 
+                                speed=stats2[5]
                         if 0 not in newivs:
 
-                            hp=rand.randint(0,31) 
+                            hp=rand.randint(0,31)
                         if 1 not in newivs:
 
                             atk=rand.randint(0,31)
@@ -3634,7 +3634,7 @@ class blaze(commands.Cog):
                         if 5 not in newivs:
 
                             speed=rand.randint(0,31)
-                        
+
                         c.execute(f"SELECT Number_Caught FROM Owned_Pokes WHERE owner={ctx.author.id}")
                         numberofpokes=c.fetchall()
                         noofpokes=len(numberofpokes)
@@ -3664,7 +3664,7 @@ class blaze(commands.Cog):
                                             s=s
                                         else:
                                             stch=rand.randint(0,5)
-                                            
+
                                             s=int(s)-stch
                                             s=str(s)
                                             at.append(s)
@@ -3677,8 +3677,8 @@ class blaze(commands.Cog):
                                 sp_def=at[4]
                                 speed=at[5]
                                 c.execute(f"INSERT into Owned_Pokes(ID_Owned , poke_id , level , Number_Caught , HP , Atk , Def , Sp_Atk , Sp_Def , Speed , Ev1 , Ev2 , Ev3 , Ev4 , Ev5 , Ev6 , FORM , Owner,EXP,move1,move2,move3,move4,shiny,Nature,Ability,gender  ) VALUES({newnumberofpokes},{num2},1,{newnumberofpokes},{hp},{atk},{df},{sp_atk},{sp_def},{speed},0,0,0,0,0,0,0,{ctx.author.id},'0','','','','','{shiny}',{nature},{ability},'{gender}');");
-                                conn.commit()                         
-                
+                                conn.commit()
+
                     breedchance=rand.randint(0,3)
                     if breedchance==0 and dstat==False:
                         newivs=rand.sample(range(6),3)
@@ -3691,7 +3691,7 @@ class blaze(commands.Cog):
                             atk=stats1[1]
                         if 2 in newivs:
 
-                            df=stats1[2] 
+                            df=stats1[2]
                         if 3 in newivs:
 
                             sp_atk=stats1[3]
@@ -3703,7 +3703,7 @@ class blaze(commands.Cog):
                             speed=stats1[5]
                         if 0 not in newivs:
 
-                            hp=rand.randint(0,31) 
+                            hp=rand.randint(0,31)
                         if 1 not in newivs:
 
                             atk=rand.randint(0,31)
@@ -3719,7 +3719,7 @@ class blaze(commands.Cog):
                         if 5 not in newivs:
 
                             speed=rand.randint(0,31)
-                        
+
                         c.execute(f"SELECT Number_Caught FROM Owned_Pokes WHERE owner={ctx.author.id}")
                         numberofpokes=c.fetchall()
                         noofpokes=len(numberofpokes)
@@ -3749,7 +3749,7 @@ class blaze(commands.Cog):
                                             s=s
                                         else:
                                             stch=rand.randint(0,5)
-                                            
+
                                             s=int(s)-stch
                                             s=str(s)
                                             at.append(s)
@@ -3760,7 +3760,7 @@ class blaze(commands.Cog):
                                 sp_def=at[4]
                                 speed=at[5]
                                 c.execute(f"INSERT into Owned_Pokes(ID_Owned , poke_id , level , Number_Caught , HP , Atk , Def , Sp_Atk , Sp_Def , Speed , Ev1 , Ev2 , Ev3 , Ev4 , Ev5 , Ev6 , FORM , Owner,EXP,move1,move2,move3,move4,shiny,Nature,Ability,gender  ) VALUES({newnumberofpokes},{num2},1,{newnumberofpokes},{hp},{atk},{df},{sp_atk},{sp_def},{speed},0,0,0,0,0,0,0,{ctx.author.id},'0','','','','','{shiny}',{nature},{ability},'{gender}');");
-                                conn.commit()                        
+                                conn.commit()
                     if breedchance==1 and dstat==False:
                         newivs=rand.sample(range(6),3)
                         await ctx.send(str(newivs))
@@ -3768,59 +3768,59 @@ class blaze(commands.Cog):
                         totalfemale=1
                         currentmale=0
                         currentfemale=0
-                         
+
                         if 0 in newivs:
                             genderpass=rand.randint(0,1)
 
                             genderpass=rand.randint(0,1)
-                            if genderpass==0 and currentmale<=totalmale: 
+                            if genderpass==0 and currentmale<=totalmale:
                                 hp=stats1[0]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<=totalfemale:
-                                hp=stats2[0]              
+                                hp=stats2[0]
                         if 1 in newivs:
                             genderpass=rand.randint(0,1)
 
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 atk=stats1[1]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                atk=stats2[1] 
+                                atk=stats2[1]
                         if 2 in newivs:
                             genderpass=rand.randint(0,1)
 
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 df=stats1[2]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                df=stats2[2] 
+                                df=stats2[2]
                         if 3 in newivs:
                             genderpass=rand.randint(0,1)
 
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 sp_atk=stats1[3]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                sp_atk=stats2[3] 
+                                sp_atk=stats2[3]
                         if 4 in newivs:
                             genderpass=rand.randint(0,1)
 
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 sp_def=stats1[4]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                sp_def=stats2[4] 
+                                sp_def=stats2[4]
                         if 5 in newivs:
                             genderpass=rand.randint(0,1)
 
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 speed=stats1[5]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                speed=stats2[5] 
+                                speed=stats2[5]
                         if 0 not in newivs:
 
-                            hp=rand.randint(0,31) 
+                            hp=rand.randint(0,31)
                         if 1 not in newivs:
 
                             atk=rand.randint(0,31)
@@ -3866,7 +3866,7 @@ class blaze(commands.Cog):
                                             s=s
                                         else:
                                             stch=rand.randint(0,5)
-                                            
+
                                             s=int(s)-stch
                                             s=str(s)
                                             at.append(s)
@@ -3877,7 +3877,7 @@ class blaze(commands.Cog):
                                 sp_def=at[4]
                                 speed=at[5]
                                 c.execute(f"INSERT into Owned_Pokes(ID_Owned , poke_id , level , Number_Caught , HP ,Atk , Def , Sp_Atk , Sp_Def , Speed , Ev1 , Ev2 , Ev3 , Ev4 , Ev5 , Ev6 , FORM , Owner,EXP,move1,move2,move3,move4,shiny,Nature,Ability,gender  ) VALUES({newnumberofpokes},{num2},1,{newnumberofpokes},{hp},{atk},{df},{sp_atk},{sp_def},{speed},0,0,0,0,0,0,0,{ctx.author.id},'0','','','','','{shiny}',{nature},{ability},'{gender}');");
-                                conn.commit()     
+                                conn.commit()
                     if breedchance==2 and dstat==False:
                         newivs=rand.sample(range(6),3)
                         await ctx.send(str(newivs))
@@ -3885,58 +3885,58 @@ class blaze(commands.Cog):
                         totalfemale=1
                         currentmale=0
                         currentfemale=0
-                         
+
                         if 0 in newivs:
 
                             genderpass=rand.randint(0,1)
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 hp=stats1[0]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                hp=stats2[0]              
+                                hp=stats2[0]
                         if 1 in newivs:
 
                             genderpass=rand.randint(0,1)
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 atk=stats1[1]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                atk=stats2[1] 
+                                atk=stats2[1]
                         if 2 in newivs:
                             genderpass=rand.randint(0,1)
 
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 df=stats1[2]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                df=stats2[2] 
+                                df=stats2[2]
                         if 3 in newivs:
                             genderpass=rand.randint(0,1)
 
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 sp_atk=stats1[3]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<totalfemale+1:
-                                sp_atk=stats2[3] 
+                                sp_atk=stats2[3]
                         if 4 in newivs:
                             genderpass=rand.randint(0,1)
 
-                            if genderpass==0 and currentmale<totalmale+1: 
+                            if genderpass==0 and currentmale<totalmale+1:
                                 sp_def=stats1[4]
                                 currentmale=currentmale+1
                             elif genderpass==1 and currentfemale<=totalfemale:
-                                sp_def=stats2[4] 
+                                sp_def=stats2[4]
                         if 5 in newivs:
                             genderpass=rand.randint(0,1)
 
-                        if genderpass==0 and currentmale<totalmale+1: 
+                        if genderpass==0 and currentmale<totalmale+1:
                                 speed=stats1[5]
                                 currentmale=currentmale+1
                         elif genderpass==1 and currentfemale<totalfemale+1:
-                                speed=stats2[5] 
+                                speed=stats2[5]
                         if 0 not in newivs:
 
-                            hp=rand.randint(0,31) 
+                            hp=rand.randint(0,31)
                         if 1 not in newivs:
 
                             atk=rand.randint(0,31)
@@ -3982,7 +3982,7 @@ class blaze(commands.Cog):
                                             s=s
                                         else:
                                             stch=rand.randint(0,5)
-                                            
+
                                             s=int(s)-stch
                                             s=str(s)
                                             at.append(s)
@@ -3993,7 +3993,7 @@ class blaze(commands.Cog):
                                 sp_def=at[4]
                                 speed=at[5]
                                 c.execute(f"INSERT into Owned_Pokes(ID_Owned , poke_id , level , Number_Caught , HP , Atk , Def , Sp_Atk , Sp_Def , Speed , Ev1 , Ev2 , Ev3 , Ev4 , Ev5 , Ev6 , FORM , Owner,EXP,move1,move2,move3,move4,shiny,Nature,Ability,gender  ) VALUES({newnumberofpokes},{num2},1,{newnumberofpokes},{hp},{atk},{df},{sp_atk},{sp_def},{speed},0,0,0,0,0,0,0,{ctx.author.id},'0','','','','','{shiny}',{nature},{ability},'{gender}');");
-                                conn.commit()     
+                                conn.commit()
                     if breedchance==3 and dstat==False:
                         newivs=rand.sample(range(6),3)
                         await ctx.send(str(newivs))
@@ -4005,7 +4005,7 @@ class blaze(commands.Cog):
                             atk=stats2[1]
                         if 2 in newivs:
 
-                            df=stats2[2] 
+                            df=stats2[2]
                         if 3 in newivs:
 
                             sp_atk=stats2[3]
@@ -4017,7 +4017,7 @@ class blaze(commands.Cog):
                             speed=stats2[5]
                         if 0 not in newivs:
 
-                            hp=rand.randint(0,31) 
+                            hp=rand.randint(0,31)
                         if 1 not in newivs:
 
                             atk=rand.randint(0,31)
@@ -4032,8 +4032,8 @@ class blaze(commands.Cog):
                             sp_def=rand.randint(0,31)
                         if 5 not in newivs:
 
-                            speed=rand.randint(0,31)                      
-                        
+                            speed=rand.randint(0,31)
+
                         c.execute(f"SELECT Number_Caught FROM Owned_Pokes WHERE owner={ctx.author.id}")
                         numberofpokes=c.fetchall()
                         noofpokes=len(numberofpokes)
@@ -4063,7 +4063,7 @@ class blaze(commands.Cog):
                                             s=s
                                         else:
                                             stch=rand.randint(0,5)
-                                            
+
                                             s=int(s)-stch
                                             s=str(s)
                                             at.append(s)
@@ -4074,11 +4074,11 @@ class blaze(commands.Cog):
                                 sp_def=at[4]
                                 speed=at[5]
                                 c.execute(f"INSERT into Owned_Pokes(ID_Owned , poke_id , level , Number_Caught , HP , Atk , Def , Sp_Atk , Sp_Def , Speed , Ev1 , Ev2 , Ev3 , Ev4 , Ev5 , Ev6 , FORM , Owner,EXP,move1,move2,move3,move4,shiny,Nature,Ability,gender  ) VALUES({newnumberofpokes},{num2},1,{newnumberofpokes},{hp},{atk},{df},{sp_atk},{sp_def},{speed},0,0,0,0,0,0,0,{ctx.author.id},'0','','','','','{shiny}',{nature},{ability},'{gender}');");
-                                conn.commit()     
+                                conn.commit()
                 else:
                     await ctx.send("Incompatible egg groups-- Your pokemon just don't like each other enough for that")
             else:
-                await ctx.send("You cannot breed event pokes")          
+                await ctx.send("You cannot breed event pokes")
         else:
             await ctx.send("Check your pokemon's genders")
     @commands.command(name='battle' , aliases=["fight"])
@@ -4088,14 +4088,14 @@ class blaze(commands.Cog):
         await ctx.send(f"<@{opponent.id}>! {ctx.author.mention} has challenged you to a pokemon duel! Say Yes to Accept or Nah to Decline!")
         yesnoduel = await self.bot.wait_for("message",timeout=1300)
         while yesnoduel.author.id != opponent.id:
-            yesnoduel = await self.bot.wait_for("message",timeout=1300) 
+            yesnoduel = await self.bot.wait_for("message",timeout=1300)
         if yesnoduel.content.casefold().capitalize()=="Yes":
             await ctx.send("Preparing for your duel..")
             duel='true'
         else:
-            await ctx.send(f"{opponent.mention} has declined the duel!")     
+            await ctx.send(f"{opponent.mention} has declined the duel!")
         if(duel=='true'):
-            conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
+            conn = sqlite3.connect('/root/blazibot/blazedb.db')
             c = conn.cursor()
             c.execute(f"Select selected from Players where ID='{ctx.author.id}'")
             selected1=c.fetchone()
@@ -4195,7 +4195,7 @@ class blaze(commands.Cog):
             speedpower=speedpower*int(level1)
             speedpower=speedpower/100
             speedpower1=speedpower+5
-            
+
             level1=s1[0]
             hp2=s2[1]
             atk2=s2[2]
@@ -4263,24 +4263,24 @@ class blaze(commands.Cog):
                     move2= await self.bot.wait_for("message",timeout=1000)
                 firstmove="move"+move1[-1:]
                 secondmove="move"+move2[-1:]
-                c.execute(f"select {firstmove} from Owned_Pokes where Number_Caught={selected1} and Owner={ctx.author.id}") 
+                c.execute(f"select {firstmove} from Owned_Pokes where Number_Caught={selected1} and Owner={ctx.author.id}")
                 moveo=c.fetchone()
                 moveo=str(moveo)[2:-3]
-                c.execute(f"select {secondmove} from Owned_Pokes where Number_Caught={selected2} and Owner={ctx.author.id}") 
+                c.execute(f"select {secondmove} from Owned_Pokes where Number_Caught={selected2} and Owner={ctx.author.id}")
                 movet=c.fetchone()
                 movet=str(movet)[2:-3]
                 c.execute(f"Select damage_class,damage_id,accuracy,type_id from Moves where identifier={moveo}")
                 movestuff1=c.fetchall()
                 c.execute(f"Select damage_class,damage_id,accuracy,type_id from Moves where identifier={movet}")
                 movestuff2=c.fetchall()
-                
-                
+
+
                 hppower1=0
-                
+
     @commands.command(name="items", aliases=['it'])
     async def items(self,ctx):
-        
-        conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')        
+
+        conn = sqlite3.connect('/root/blazibot/blazedb.db')
         c = conn.cursor()
         c.execute(f"select number,name from items where owner={ctx.author.id}")
         items=c.fetchall()
@@ -4294,10 +4294,10 @@ class blaze(commands.Cog):
         items=re.sub('( [^ ]*) ', r'\1 ', items)
         items=items.replace(",","--")
         items=items.replace(" ","-")
-        
+
         items=items.replace("---",".")
         items=items.replace("--","_")
-        
+
         itemslist=items.split('`')
         count=0
         for i in itemslist:
@@ -4305,16 +4305,16 @@ class blaze(commands.Cog):
                 i=i+'\n'
                 count=0
             else:
-                count= count+1        
-        
+                count= count+1
+
         await menu(ctx, str(itemslist)[2:-2].replace('_','\n').replace('.','--').split('`'), DEFAULT_CONTROLS)
-        
+
         c.close()
-        
+
     @commands.command(name="sell" , aliases=["slp"])
     async def sell(self,ctx,poke:int,price:int):
-        await ctx.send("You can sell pokemon to the global market this way!")   
-        conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')        
+        await ctx.send("You can sell pokemon to the global market this way!")
+        conn = sqlite3.connect('/root/blazibot/blazedb.db')
         c = conn.cursor()
         c.execute(f"select poke_id from Owned_Pokes where Number_Caught={poke} and Owner={ctx.author.id}")
         num=c.fetchone()
@@ -4351,8 +4351,8 @@ class blaze(commands.Cog):
         numberlist=numberlist.replace("]","")
         numberlist=numberlist.replace("[","")
         numberlist=numberlist.replace(",,",",")
-       
-        
+
+
         await ctx.send(f"list {numberlist}")
         numa=numberlist.split(',')
         numba=len(numa)
@@ -4374,7 +4374,7 @@ class blaze(commands.Cog):
         numlist=numlist.replace(",,",",")
         numlist=numlist.replace("'","")
         numb=numlist.split(',')
-        
+
         current=1
         n=len(numb)
         numb=str(numb).replace("'","")
@@ -4405,15 +4405,15 @@ class blaze(commands.Cog):
         partypokes=partypokes.replace(",,",",")
         party=partypokes.split(',')
         partyno=1
-        
-                     
+
+
         c.close()
-        await ctx.send(f"You have put your {name} on the market for {price}")   
+        await ctx.send(f"You have put your {name} on the market for {price}")
     @commands.command(name="market", aliases=['mp'])
     async def market(self,ctx):
         await ctx.send("https://3.bp.blogspot.com/-MgfLiUcvUxk/VqquHeOAkeI/AAAAAAAAA74/8jwU6Vh6Dgo/s640/tumblr_inline_mr2gi3H4e51rvwlfd.gif")
         await ctx.send("Welcome to the Global Pokemon Market! You can buy and sell pokemon here!")
-        conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')        
+        conn = sqlite3.connect('/root/blazibot/blazedb.db')
         c = conn.cursor()
         c.execute(f"select number from market")
         market=c.fetchall()
@@ -4426,40 +4426,40 @@ class blaze(commands.Cog):
         marketpokes=market.split(',')
         num=len(marketpokes)
         current=1
-        
-            
+
+
         await ctx.send("Number    |    Seller    |    Name    |   IV   |    Level    |    Cost")
         stuff=""
         while current<=num:
             c.execute(f"select * from market where number={current}")
-            pokeinfos=c.fetchall()   
+            pokeinfos=c.fetchall()
             pokeinfos=str(pokeinfos)
             pokeinfos=pokeinfos.replace("(","")
             pokeinfos=pokeinfos.replace(")","")
             pokeinfos=pokeinfos.replace("[","")
             pokeinfos=pokeinfos.replace("]","")
             pokeinfos=pokeinfos.replace(",,",",")
-            pokeinfo=pokeinfos.split(',')         
+            pokeinfo=pokeinfos.split(',')
             stuff=(stuff+str(pokeinfo)+'\n')
-            
+
             current=current+1
         if (current>num):
             print("thats all")
             await ctx.send_interactive(pagify(stuff))
         if(num<1):
             await ctx.send("There are no pokemon in the market!")
-            
+
         c.close()
     @commands.command(name="mart", aliases=['pm','shop','pokemart'])
     async def mart(self,ctx):
         await ctx.send("https://vignette.wikia.nocookie.net/pokemon/images/2/27/A_pok%C3%A9_mart_in_Omega_Ruby_%26_Alpha_Saphire.png~/revision/latest?cb=20151128233933")
-        conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
+        conn = sqlite3.connect('/root/blazibot/blazedb.db')
         c = conn.cursor()
         c.execute(f"select name from shop")
         num=c.fetchall()
         num=str(num)
         num=num[1:-1]
-        
+
         num=num.replace(")","")
         num=num.replace("(","")
         num=num.replace("'","")
@@ -4485,7 +4485,7 @@ class blaze(commands.Cog):
         c.close()
     @commands.command(name="eventmon" , aliases=["event"])
     async def eventmon(self,ctx):
-        conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')        
+        conn = sqlite3.connect('/root/blazibot/blazedb.db')
         c = conn.cursor()
         c.execute(f"select poke_id from Owned_Pokes where Owner={ctx.message.author.id}")
         pokes=c.fetchall()
@@ -4499,7 +4499,7 @@ class blaze(commands.Cog):
             await ctx.send("You already have this event poke!")
         else:
             c.execute(f"SELECT Number_Caught FROM Owned_Pokes WHERE owner='{ctx.message.author.id}'")
-                        
+
             numberofpokes=c.fetchall()
             noofpokes=len(numberofpokes)
             newnumberofpokes=noofpokes+1
@@ -4509,7 +4509,7 @@ class blaze(commands.Cog):
             df=rand.randint(15,31)
             sp_atk=rand.randint(15,31)
             sp_def=rand.randint(15,31)
-            speed=rand.randint(15,31)    
+            speed=rand.randint(15,31)
             gender=rand.randint(0,1)
             if(gender==0):
                 pickedg="Male"
@@ -4520,7 +4520,7 @@ class blaze(commands.Cog):
             c.execute(f"INSERT into Owned_Pokes(ID_Owned , poke_id , level , Number_Caught , HP , Atk , Def , Sp_Atk , Sp_Def , Speed , Ev1 , Ev2 , Ev3 , Ev4 , Ev5 , Ev6 , FORM , Owner,EXP,move1,move2,move3,move4,gender,item,Nature,Shiny,ability) VALUES({newnumberofpokes},303030,10,{newnumberofpokes},{hp},{atk},{df},{sp_atk},{sp_def},{speed},0,0,0,0,0,0,0,{ctx.message.author.id},0,'','','','','{pickedg}','None','{nature}','False','{ability}');");
             conn.commit()
             c.close()
-            
+
     @commands.command(name="tourney" , aliases=["t"])
     async def tourney(self,ctx):
         cmds=ctx.message.content
@@ -4537,7 +4537,7 @@ class blaze(commands.Cog):
     @charge(amount=10)
     @commands.cooldown(1, 600,commands.BucketType.user)
     async def pp(self,ctx):
-        conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')        
+        conn = sqlite3.connect('/root/blazibot/blazedb.db')
         c = conn.cursor()
         c.execute(f"SELECT ID from Players where ID='{ctx.author.id}'")
         exists=c.fetchone()
@@ -4550,7 +4550,7 @@ class blaze(commands.Cog):
             numselected=c.fetchone()
             numselected=str(numselected)
             numselected=numselected[1:-2]
-            numselected=int(numselected) 
+            numselected=int(numselected)
             c.execute(f"select poke_id from Owned_Pokes where Owner={ctx.author.id} and Number_Caught={numselected}")
             selected=c.fetchone()
             selected=str(selected)[1:-2]
@@ -4564,7 +4564,7 @@ class blaze(commands.Cog):
             friendship=str(friendship)[1:-2]
             fr=int(friendship)+1
             if int(friendship)< 300:
-                    
+
                 c.execute(f"update Owned_Pokes set friendship={fr} where Owner={ctx.author.id} and Number_Caught={numselected}")
                 conn.commit()
                 await ctx.send(f"You raised {name}'s friendship to {str(fr)}")
@@ -4576,14 +4576,14 @@ class blaze(commands.Cog):
                 level=str(level)[1:-2]
                 lv=int(level)+1
                 c.execute(f"update Owned_Pokes set level={lv} where Owner={ctx.author.id} and Number_Caught={numselected}")
-                conn.commit()  
+                conn.commit()
                 await ctx.send(f"You raised {name}'s level to {str(lv)} out of its undying friendship to you!")
-            
+
     @commands.command(name="spawn" , aliases=["look"])
     @charge(amount=80)
     @commands.cooldown(1, 1800,commands.BucketType.user)
     async def spawn(self,ctx,typeof:str):
-        conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')        
+        conn = sqlite3.connect('/root/blazibot/blazedb.db')
         c = conn.cursor()
         c.execute(f"SELECT ID from Players where ID='{ctx.author.id}'")
         exists=c.fetchone()
@@ -4592,8 +4592,8 @@ class blaze(commands.Cog):
             await ctx.send("Go see Oak First with -start!")
         else:
             await ctx.send(ctx.author.mention+" has been charged 80 BlaziBucks")
-           
-            conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
+
+            conn = sqlite3.connect('/root/blazibot/blazedb.db')
             c = conn.cursor()
             c.execute(f"Select Name from Pokes where Type like '%{typeof}%'")
             spawnpokes=c.fetchall()
@@ -4604,7 +4604,7 @@ class blaze(commands.Cog):
             spn=rand.randint(0,randspawn-1)
             spawnedpoke=spawns[spn]
             spawnedpoke=spawnedpoke[1:-1]
-            
+
             c.execute(f"select selected from Players where ID={ctx.author.id}")
             selected=c.fetchone()
             selected=str(selected)
@@ -4623,7 +4623,7 @@ class blaze(commands.Cog):
                 spawnedpoke=spawnedpoke.replace("-y","")
                 spawnedpoke=spawnedpoke.replace("-x","")
             else:
-                spawnedpoke=spawnedpoke            
+                spawnedpoke=spawnedpoke
             c.execute(f"Select Number from pokes where Name='{spawnedpoke}'")
             poke=c.fetchone()
             poke=str(poke)
@@ -4650,32 +4650,32 @@ class blaze(commands.Cog):
             await ctx.send(embed=embed)
             catchtry = await self.bot.wait_for("message",timeout=1300)
             while catchtry.author.id != ctx.author.id and catchtry.channel != ctx.channel or catchtry.author.id != ctx.author.id:
-                
-                    
-                    catchtry = await self.bot.wait_for("message",timeout=1300)                
+
+
+                    catchtry = await self.bot.wait_for("message",timeout=1300)
             if catchtry.content.casefold().capitalize() in spawnedpoke or catchtry.content=='*':
-                conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
+                conn = sqlite3.connect('/root/blazibot/blazedb.db')
                 c = conn.cursor()
                 c.execute(f"SELECT Number_Caught FROM Owned_Pokes WHERE owner='{catchtry.author.id}'")
-                        
+
                 numberofpokes=c.fetchall()
                 c.close()
                 noofpokes=len(numberofpokes)
                 newnumberofpokes=noofpokes+1
-                conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
+                conn = sqlite3.connect('/root/blazibot/blazedb.db')
                 level=rand.randint(5,10)
                 hp=rand.randint(10,20)
                 atk=rand.randint(10,20)
                 df=rand.randint(10,20)
                 sp_atk=rand.randint(10,20)
                 sp_def=rand.randint(10,20)
-                speed=rand.randint(10,20)    
+                speed=rand.randint(10,20)
                 gender=rand.randint(0,1)
                 if(gender==0):
                     pickedg="Male"
                 else:
                     pickedg="Female"
-                conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db') 
+                conn = sqlite3.connect('/root/blazibot/blazedb.db')
                 c = conn.cursor()
                 c.execute(f"select nature from natures")
                 allnatures=c.fetchall()
@@ -4693,7 +4693,7 @@ class blaze(commands.Cog):
                 nature=nature.replace(" ","")
                 if ',' in nature:
                     nature='Jolly'
-                
+
                 c.execute(f"select ability from abilities where poke like '%{poke}%'")
                 abilitylist=c.fetchall()
                 abilitylist=str(abilitylist)
@@ -4710,7 +4710,7 @@ class blaze(commands.Cog):
                 c.execute(f"INSERT into Owned_Pokes(ID_Owned , poke_id , level , Number_Caught , HP , Atk , Def , Sp_Atk , Sp_Def , Speed , Ev1 , Ev2 , Ev3 , Ev4 , Ev5 , Ev6 , FORM , Owner,EXP,move1,move2,move3,move4,gender,item,Nature,Shiny,ability,friendship) VALUES({newnumberofpokes},{poke},{level},{newnumberofpokes},{hp},{atk},{df},{sp_atk},{sp_def},{speed},0,0,0,0,0,0,0,{catchtry.author.id},0,'','','','','{pickedg}','None','{nature}','{shiny}','{ability}',0);");
                 conn.commit()
                 c.close()
-                await ctx.send("You caught it!")        
+                await ctx.send("You caught it!")
             else:
                 await ctx.send(f"{spawnedpoke} fled!")
 
@@ -4720,12 +4720,12 @@ class blaze(commands.Cog):
         if 'waifu' in message.content or 'asuna' in message.content or 'sao' in message.content or 'anime' in message.content:
             wai="♡♡ AAAAAAAAAAASSSSSSSSSSSSSSSUUUUUUUUUUUNNNNNNNNNNNAAAAAAAAAAAA♡♡"+"\n"
             await message.channel.send(wai*5 )
-        conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
+        conn = sqlite3.connect('/root/blazibot/blazedb.db')
         c = conn.cursor()
         c.execute(f"select disabled from disables where disabled={int(message.channel.id)}")
         redirects=c.fetchone()
         redirect=str(redirects)
-        if '-' in message.content or message.author.id==548295233138327583: 
+        if '-' in message.content or message.author.id==548295233138327583:
             if 'on' in redirect:
                 " "
             else:
@@ -4785,7 +4785,7 @@ class blaze(commands.Cog):
                 m=m.replace("s_h_i_t".casefold(),"||s.h.i.t||")
                 m=m.replace("b_i_t_c_h".casefold(),"||b_i_t_c_h||")
             elif 'ken' in message.content.lower() or 'jay' in message.content.lower() or 'sifu' in message.content.lower():
-                
+
                 if message.author.id !=548295233138327583 and message.author !=462416556853559306:
                     await message.channel.send(f"Pinging <@462416556853559306>")
             elif 'error' in message.content.lower() or 'admin' in message.content.lower():
@@ -4796,7 +4796,7 @@ class blaze(commands.Cog):
                 await message.channel.send('yes')
             elif '<@548295233138327583>' in message.content.lower() and 'battle' not in message.content.lower() and 'duel' not in message.content.lower():
                 info="""Tutorial For Blazibot!
-        
+
 [1] To start just type -start
 [2] You probably want to view it now, don't you? Well just type -i 1
 [3] Maybe you want some credits to start your journey, just type -payday
@@ -4812,20 +4812,20 @@ class blaze(commands.Cog):
         count=count+1
         self.count=count
         print(str(count))
-        mod=rand.randint(2,30)  
-        
+        mod=rand.randint(2,30)
+
         if(0==0):
-            conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
+            conn = sqlite3.connect('/root/blazibot/blazedb.db')
             c = conn.cursor()
             c.execute(f"Select selected from Players where ID='{message.author.id}'")
             numselected=c.fetchone()
             numselected=str(numselected)
             numselected=numselected[1:-2]
-            
+
             numselected=int(numselected)
-           
+
             c.execute(f"Select poke_id, EXP,level from Owned_Pokes where Owner='{message.author.id}' and ID_Owned={numselected}")
-            
+
             pokeidexp=c.fetchall()
             pokeidexp=str(pokeidexp)
             idexp=pokeidexp.split(',')
@@ -4845,8 +4845,8 @@ class blaze(commands.Cog):
             c.execute(f"select Equipped from Players where ID= {message.author.id}")
             plitem=c.fetchone()
             plitem=str(plitem)
-            
-            di=int(lvl)*0.2              
+
+            di=int(lvl)*0.2
             if int(lvl)<100:
                 xpgain=int(lvl)*int(lvl)
                 xpgain=xpgain-int(lvl)
@@ -4856,21 +4856,21 @@ class blaze(commands.Cog):
                 exp=float(exp)
                 if 'Lucky-egg' in item:
                     xpgain=xpgain*1.5
-                
+
                 if 'Motor' in plitem:
                     xpgain=xpgain*4.0
-                
+
                 elif 'Bike' in plitem:
                     xpgain=xpgain*2.0
                 else:
                     xpgain=xpgain*1.0
-                
+
                 totalxp=int(xpgain+exp)
                 if xpgain<1 or totalxp<1:
                     totalxp=15
                 c.execute(f"update Owned_Pokes set EXP='{str(totalxp)}' where Owner='{message.author.id}' and ID_Owned={numselected}")
                 conn.commit()
-            
+
             c.execute(f"select experience from explv  where level='{lvl}' ")
             maxexp=c.fetchone()
             maxexp=str(maxexp)
@@ -4886,8 +4886,8 @@ class blaze(commands.Cog):
             m= int(maxexp)
             if t>m:
                 await message.channel.send(f"Your pokemon grew to {int(lvl)+1}")
-                
-                
+
+
                 c.execute(f"update Owned_Pokes set EXP='0' where Owner='{message.author.id}'")
                 conn.commit()
                 c.execute(f"update Owned_Pokes set level='{int(lvl)+1}' where Owner='{message.author.id}' and ID_Owned={numselected};")
@@ -4915,28 +4915,28 @@ class blaze(commands.Cog):
                 "do nothing"
             if minevo.isdigit()==False:
                 x='o'
-            
+
             else:
-                
-               
+
+
                 level=int(lvl)
-                evo=str(minevo)            
+                evo=str(minevo)
                 if(level>int(evo) and evo.isdigit()==True):
-               
+
                     newnum=int(idp)
                     newnum = newnum+1
-                
+
                     print(newnum)
                     c.execute(f"update Owned_Pokes set poke_id={newnum} where Owner='{message.author.id}' and ID_Owned={numselected};")
                     conn.commit()
-                    await message.channel.send(f"Your {pokename} evolved!") 
+                    await message.channel.send(f"Your {pokename} evolved!")
                     c.close()
                 else:
                     "do nothing"
-       
+
         if(count==mod):
-            sp=rand.randint(-17,809)       
-            conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')
+            sp=rand.randint(-17,809)
+            conn = sqlite3.connect('/root/blazibot/blazedb.db')
             Shiny='False'
             legends=[144,145,146,150,151,243,244,245,249,250,251,377,378,379,380,381,382,383,384,385,386,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,638,639,640,641,642,643,644,645,646,647,648,649]
             rate=rand.randint(0,1000)
@@ -4960,7 +4960,7 @@ class blaze(commands.Cog):
             else:
                 legends=[144,145,146,150,151,243,244,245,249,250,251,377,378,379,380,381,382,383,384,385,386,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,638,639,640,641,642,643,644,645,646,647,648,649]
             if sp in legends:
-                rate2=rand.randint(0,1000)            
+                rate2=rand.randint(0,1000)
                 if rate2==0:
                     sp=sp
                 else:
@@ -4972,12 +4972,12 @@ class blaze(commands.Cog):
                         sp=sp+randch
             else:
                 sp=sp
-                
+
             c = conn.cursor()
             c.execute(f"SELECT Name FROM Pokes WHERE number={sp}")
             randName=c.fetchone()
             randompoke=(", ".join(randName))
-            
+
             poke=str(randompoke)
             if "Mega" in randompoke:
                 randompoke=randompoke.replace("Mega-","")
@@ -4989,16 +4989,16 @@ class blaze(commands.Cog):
                 sp=c.fetchone()
                 sp=str(sp)
                 sp=sp[1:-2]
-            
+
             embed = discord.Embed(title="Random Spawns", description="Random Spawn", color=0x00ff00)
-            
+
             embed.set_image(url=f"http://157.245.8.88/html/dex/media/pokemon/sugimori/{str(sp)}.png")
-            
+
             embed.add_field(name="Catch:", value="Say the Pokemon's name to catch it!!", inline=False)
             c.execute(f"select redirect_channel from redirects where channel_id={int(message.channel.id)}")
             redirects=c.fetchone()
             redirect=str(redirects)
-            
+
             if 'on' in redirect:
                 chan=message.channel
                 await chan.send(embed=embed)
@@ -5006,9 +5006,9 @@ class blaze(commands.Cog):
                 chan=message.guild.get_channel(int(redirect[1:-2]))
                 await chan.send(embed=embed)
             tries=0
-                         
+
             catchtry = await self.bot.wait_for("message",timeout=1300)
-            conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db')        
+            conn = sqlite3.connect('/root/blazibot/blazedb.db')
             c = conn.cursor()
             c.execute(f"SELECT ID from Players where ID='{message.author.id}'")
             exists=c.fetchone()
@@ -5016,7 +5016,7 @@ class blaze(commands.Cog):
             if('o' in exists):
                 await chan.send("Go see Oak First with -start!")
             else:
-                
+
                 tries=0
                 c.execute(f"select name from items where Owner={catchtry.author.id}")
                 items=c.fetchall()
@@ -5029,13 +5029,13 @@ class blaze(commands.Cog):
                 while catchtry.content.casefold().capitalize()!=randompoke.casefold().capitalize() and tries<6:
                        catchtry = await self.bot.wait_for("message",timeout=1300)
                        if catchtry.channel == chan:
-                            
+
                             tries=tries+1
                 if(catchtry.content.casefold().capitalize() in randompoke.casefold().capitalize()):
-                    if(catchtry.author.id!=548295233138327583):              
+                    if(catchtry.author.id!=548295233138327583):
                         if(tries<6):
                                 await chan.send(f"<@{catchtry.author.id}> is fighting the {randompoke}")
-                            
+
                                 level=rand.randint(5,75)
                                 hp=rand.randint(0,31)
                                 atk=rand.randint(0,31)
@@ -5043,9 +5043,9 @@ class blaze(commands.Cog):
                                 sp_atk=rand.randint(0,31)
                                 sp_def=rand.randint(0,31)
                                 speed=rand.randint(0,31)
-                                conn = sqlite3.connect('/home/kensei/Desktop/blazi/blazedb.db') 
+                                conn = sqlite3.connect('/root/blazibot/blazedb.db')
                                 c = conn.cursor()
-                                c.execute(f"SELECT Number_Caught FROM Owned_Pokes WHERE owner='{catchtry.author.id}'")                        
+                                c.execute(f"SELECT Number_Caught FROM Owned_Pokes WHERE owner='{catchtry.author.id}'")
                                 numberofpokes=c.fetchall()
                                 numberofpokes=str(numberofpokes)
                                 numberofpokes=numberofpokes.replace("(","")
@@ -5053,12 +5053,12 @@ class blaze(commands.Cog):
                                 numberofpokes=numberofpokes.replace("[","")
                                 numberofpokes=numberofpokes.replace("]","")
                                 numberofpokes=numberofpokes.replace(",,",",")
-                                
+
                                 pokesl=numberofpokes.split(',')
-                                
+
                                 noofpokes=len(pokesl)
                                 newnumberofpokes=noofpokes+1
-                                              
+
                                 gender=rand.randint(0,1)
                                 if(gender==0):
                                     pickedg="Male"
@@ -5082,7 +5082,7 @@ class blaze(commands.Cog):
                                 if ',' in nature:
                                     nature='Jolly'
                                 c.execute(f"select ability from abilities where poke like '%{sp}%'")
-                                                                
+
                                 abilitylist=c.fetchall()
                                 abilitylist=str(abilitylist)
                                 abilitylist=abilitylist.replace(")","")
@@ -5096,15 +5096,15 @@ class blaze(commands.Cog):
                                 if abilitylen>2:
                                     randabil=rand.randint(0,abilitylen-1)
                                     ability=abilities[randabil]
-                                
+
                                 else:
                                     ability="none"
-                                
+
                                 c.execute(f"INSERT into Owned_Pokes(ID_Owned , poke_id , level , Number_Caught , HP , Atk , Def , Sp_Atk , Sp_Def , Speed , Ev1 , Ev2 , Ev3 , Ev4 , Ev5 , Ev6 , FORM , Owner,EXP,move1,move2,move3,move4,gender,item,Nature,shiny,ability,friendship) VALUES({newnumberofpokes-1},{int(sp)},{int(level)},{int(newnumberofpokes-1)},{hp},{atk},{df},{sp_atk},{sp_def},{speed},0,0,0,0,0,0,0,{catchtry.author.id},0,'','','','','{pickedg}','None','{nature}','{Shiny}','{ability}',0);");
                                 conn.commit()
-                            
+
                                 await chan.send("You caught it")
-                            
+
                                 c.close()
                         elif(tries>=6):
                                 await chan.send("it fled!")
