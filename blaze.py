@@ -54,7 +54,7 @@ class blaze(commands.Cog):
     @commands.command(name='moves' , aliases=["m"])
     async def moves (self, ctx):
         await ctx.send("this will show your selected moves")
-        conn=sqlite3.connect('157.245.8.88:~/blazibot/blazedb.db')
+        conn=sqlite3.connect('/root/blazibot/blazedb.db')
 
         c = conn.cursor()
         c.execute(f"select selected from Players where ID='{ctx.author.id}'")
@@ -83,7 +83,7 @@ class blaze(commands.Cog):
         c.close()
     @commands.command(name='doubleteam' , aliases=["agility"])
     async def doubleteam(self, ctx):
-       conn=sqlite3.connect('157.245.8.88:~/blazibot/blazedb.db')
+       conn=sqlite3.connect('/root/blazibot/blazedb.db')
        c = conn.cursor()
        c.execute(f"select selected from Players where ID={ctx.author.id}")
        selected=c.fetchone()
@@ -101,7 +101,7 @@ class blaze(commands.Cog):
        await ctx.send(f"{ctx.author.mention}'s {selectedname}'s evasiveness rose-- Nothing can touch it now!")
     @commands.command(name='defensecurl' , aliases=["df"])
     async def defensecurl(self, ctx):
-       conn=sqlite3.connect('157.245.8.88:~/blazibot/blazedb.db')
+       conn=sqlite3.connect('/root/blazibot/blazedb.db')
        c = conn.cursor()
        c.execute(f"select selected from Players where ID={ctx.author.id}")
        selected=c.fetchone()
@@ -119,7 +119,7 @@ class blaze(commands.Cog):
        await ctx.send(f"{ctx.author.mention}'s {selectedname}'s defense Rose dramatically!")
     @commands.command(name='helpinghand' , aliases=["hh"])
     async def helpinghand(self, ctx):
-       conn=sqlite3.connect('157.245.8.88:~/blazibot/blazedb.db')
+       conn=sqlite3.connect('/root/blazibot/blazedb.db')
        c = conn.cursor()
        c.execute(f"select selected from Players where ID={ctx.author.id}")
        selected=c.fetchone()
@@ -137,7 +137,7 @@ class blaze(commands.Cog):
        await ctx.send(f"{ctx.author.mention}'s {selectedname} is ready to assist!")
     @commands.command(name='givedeems' , aliases=["gd"])
     async def givedeems(self, ctx,player:discord.Member,amt:int):
-        conn=sqlite3.connect('157.245.8.88:~/blazibot/blazedb.db')
+        conn=sqlite3.connect('/root/blazibot/blazedb.db')
         c = conn.cursor()
         c.execute(f"select redeems from Players where ID={ctx.author.id}")
         adeem=c.fetchone()
@@ -161,7 +161,7 @@ class blaze(commands.Cog):
             c.close()
     @commands.command(name='focusenergy' , aliases=["adrenaline"])
     async def focusenergy(self, ctx):
-       conn=sqlite3.connect('157.245.8.88:~/blazibot/blazedb.db')
+       conn=sqlite3.connect('/root/blazibot/blazedb.db')
        c = conn.cursor()
        c.execute(f"select selected from Players where ID={ctx.author.id}")
        selected=c.fetchone()
@@ -180,7 +180,7 @@ class blaze(commands.Cog):
     @commands.command(name='raid' , aliases=["rp"])
     @commands.cooldown(1, 3600,commands.BucketType.user)
     async def raid(self, ctx):
-        conn=sqlite3.connect('157.245.8.88:~/blazibot/blazedb.db')
+        conn=sqlite3.connect('/root/blazibot/blazedb.db')
 
         c = conn.cursor()
         c.execute(f"select name from raidtable")
@@ -478,7 +478,7 @@ class blaze(commands.Cog):
     async def npc(self, ctx):
         await ctx.send("This will be NPC duels")
         npcrand=rand.randint(-17,809)
-        conn=sqlite3.connect('157.245.8.88:~/blazibot/blazedb.db')
+        conn=sqlite3.connect('/root/blazibot/blazedb.db')
         c = conn.cursor()
         c.execute(f"select Type from Pokes where Number={npcrand}")
         npctype=c.fetchone()
@@ -575,7 +575,7 @@ class blaze(commands.Cog):
     @commands.command(name='dis' , aliases=["disable"])
     @checks.admin()
     async def dis(self, ctx,oldchannel:discord.TextChannel):
-        conn=sqlite3.connect('157.245.8.88:~/blazibot/blazedb.db')
+        conn=sqlite3.connect('/root/blazibot/blazedb.db')
         c = conn.cursor()
         await ctx.send(f"Attempting to disable {str(oldchannel)}")
         old = oldchannel.id
@@ -593,7 +593,7 @@ class blaze(commands.Cog):
     @commands.command(name='redirect' , aliases=["change spawn"])
     @checks.admin()
     async def redirect(self, ctx,oldchannel:discord.TextChannel, newchannel:discord.TextChannel):
-        conn=sqlite3.connect('157.245.8.88:~/blazibot/blazedb.db')
+        conn=sqlite3.connect('/root/blazibot/blazedb.db')
         c = conn.cursor()
         await ctx.send(f"Attempting to redirect from {str(oldchannel)} to {str(newchannel)}")
         old = oldchannel.id
@@ -616,7 +616,7 @@ class blaze(commands.Cog):
     async def movesets(self, ctx):
         author=ctx.author.id
         authorpic=ctx.author.avatar_url
-        conn=sqlite3.connect('157.245.8.88:~/blazibot/blazedb.db')
+        conn=sqlite3.connect('/root/blazibot/blazedb.db')
 
         c = conn.cursor()
         c.execute(f"select selected from Players where ID='{author}'")
@@ -664,7 +664,7 @@ class blaze(commands.Cog):
         author=ctx.author.id
         authorpic=ctx.author.avatar_url
         try:
-            conn=sqlite3.connect('157.245.8.88:~/blazibot/blazedb.db')
+            conn=sqlite3.connect('/root/blazibot/blazedb.db')
         except:
             await ctx.send("I could not connect")
         c = conn.cursor()
