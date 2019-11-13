@@ -663,8 +663,10 @@ class blaze(commands.Cog):
     async def learn(self, ctx,spot:str,movename:str):
         author=ctx.author.id
         authorpic=ctx.author.avatar_url
-        conn=sqlite3.connect('157.245.8.88:~/blazibot/blazedb.db')
-
+        try:
+            conn=sqlite3.connect('157.245.8.88:~/blazibot/blazedb.db')
+        except:
+            await ctx.send("I could not connect")
         c = conn.cursor()
         c.execute(f"select selected from Players where ID='{author}'")
         num=c.fetchone()
