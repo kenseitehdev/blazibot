@@ -2900,8 +2900,8 @@ class blaze(commands.Cog):
             gender2=gender2[1:-2]
         else:
             gender2=gender2[2:-3]
-        accepted1=["Male","Tranny","None"]
-        accepted2=["Female","Tranny","None"]
+        accepted1=["Male".casefold(),"Tranny".casefold(),"None".casefold()]
+        accepted2=["Female".casefold(),"Tranny".casefold(),"None".casefold()]
         c.execute(f"select nature from Natures")
         natures=c.fetchall()
         natures=str(natures)
