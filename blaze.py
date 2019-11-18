@@ -2900,8 +2900,8 @@ class blaze(commands.Cog):
             gender2=gender2[1:-2]
         else:
             gender2=gender2[2:-3]
-        accepted1=["Male".casefold(),"Tranny".casefold(),"None".casefold()]
-        accepted2=["Female".casefold(),"Tranny".casefold(),"None".casefold()]
+        accepted1=["Male","Tranny","None"]
+        accepted2=["Female","Tranny","None"]
         c.execute(f"select nature from Natures")
         natures=c.fetchall()
         natures=str(natures)
@@ -2928,7 +2928,7 @@ class blaze(commands.Cog):
         lena=len(abilitylist)
         randa=rand.randint(0,lena-1)
         ability=abilitylist[randa]
-        if gender1 in accepted1 and gender2 in accepted2:
+        if gender1.casefold().capitalize() in accepted1 and gender2.casefold().capitalize() in accepted2:
             await ctx.send("gonna try to breed")
             c.execute(f"select egg_1 from Pokes where Number={num1}")
             egg11=c.fetchone()
