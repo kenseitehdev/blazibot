@@ -4718,7 +4718,7 @@ class blaze(commands.Cog):
 
             c.close()
     @commands.Cog.listener()
-    async def on_command_error(ctx,error):
+    async def on_command_error(self,ctx,error):
         await ctx.send_interactive(pagify(str(error)))
     @commands.Cog.listener()
     async def on_message(self,message):
