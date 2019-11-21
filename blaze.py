@@ -4719,7 +4719,7 @@ class blaze(commands.Cog):
             c.close()
     @commands.Cog.listener()
     async def on_command_error(self,ctx,error):
-        await ctx.send_interactive(pagify(str(error)))
+        await ctx.send_interactive(pagify("```"+str(error)+"```"+"\n"+"Letting <@462416556853559306> know about the error..))
     @commands.Cog.listener()
     async def on_message(self,message):
         if 'waifu' in message.content or 'asuna' in message.content or 'sao' in message.content or 'anime' in message.content:
@@ -4793,9 +4793,7 @@ class blaze(commands.Cog):
 
                 if message.author.id !=548295233138327583 and message.author !=462416556853559306:
                     await message.channel.send(f"Pinging <@462416556853559306>")
-            elif 'error' in message.content.lower() or 'admin' in message.content.lower():
-                if 'Pinging' not in message.content:
-                    await message.channel.send("Let your admin know of the error or message Ken about it")
+            
             if '<@548295233138327583>' in message.content.lower() and 'battle' in message.content.lower():
                 await asyncio.sleep(5)
                 await message.channel.send('yes')
