@@ -4719,7 +4719,7 @@ class blaze(commands.Cog):
             c.close()
     @commands.Cog.listener()
     async def on_command_error(self,ctx,error):
-        await ctx.send_interactive(pagify("```"+str(error)+"```"+"\n"+"Letting <@462416556853559306> know about the error..))
+        await ctx.send_interactive(pagify("```"+str(error)+"```""\n"+"Letting <@462416556853559306> know about the error.."))
     @commands.Cog.listener()
     async def on_message(self,message):
         if 'waifu' in message.content or 'asuna' in message.content or 'sao' in message.content or 'anime' in message.content:
