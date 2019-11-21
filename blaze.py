@@ -4718,6 +4718,9 @@ class blaze(commands.Cog):
 
             c.close()
     @commands.Cog.listener()
+    async def on_command_error(ctx,error):
+        await ctx.send(str(error))
+    @commands.Cog.listener()
     async def on_message(self,message):
         if 'waifu' in message.content or 'asuna' in message.content or 'sao' in message.content or 'anime' in message.content:
             wai="♡♡ AAAAAAAAAAASSSSSSSSSSSSSSSUUUUUUUUUUUNNNNNNNNNNNAAAAAAAAAAAA♡♡"+"\n"
