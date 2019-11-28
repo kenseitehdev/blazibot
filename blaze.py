@@ -2952,7 +2952,7 @@ class blaze(commands.Cog):
             sp_atk=""
             sp_def=""
             speed=""
-            eventpokes=['Bulbaween','Ivyween','Veenuween','Mimiween']
+            eventpokes=['Bulbaween','Ivyween','Veenuween','Mimiween','Roast-Fetchd']
             if  'Mega' not in name1 and 'Mega' not in name2 and 'ween' not in name1 and 'ween' not in name2:
                 if egg11==egg21 or egg11==egg22 or egg12==egg21 or egg22==egg22 or '-' in egg11 or '-' in egg12 or '-' in egg21 or '-' in egg22:
                     c.execute(f"select Hp,Atk,Def,Sp_atk,Sp_def,Speed from Owned_Pokes where Number_Caught={poke1} and Owner={ctx.author.id}")
@@ -4497,7 +4497,7 @@ class blaze(commands.Cog):
         pokes=pokes.replace("[","")
         pokes=pokes.replace("]","")
         pokes=pokes.replace(",,",",")
-        if '303030' in pokes:
+        if '505050' in pokes:
             await ctx.send("You already have this event poke!")
         else:
             c.execute(f"SELECT Number_Caught FROM Owned_Pokes WHERE owner='{ctx.message.author.id}'")
@@ -4519,7 +4519,7 @@ class blaze(commands.Cog):
                 pickedg="Female"
             nature='Jolly'
             ability='None'
-            c.execute(f"INSERT into Owned_Pokes(ID_Owned , poke_id , level , Number_Caught , HP , Atk , Def , Sp_Atk , Sp_Def , Speed , Ev1 , Ev2 , Ev3 , Ev4 , Ev5 , Ev6 , FORM , Owner,EXP,move1,move2,move3,move4,gender,item,Nature,Shiny,ability) VALUES({newnumberofpokes},303030,10,{newnumberofpokes},{hp},{atk},{df},{sp_atk},{sp_def},{speed},0,0,0,0,0,0,0,{ctx.message.author.id},0,'','','','','{pickedg}','None','{nature}','False','{ability}');");
+            c.execute(f"INSERT into Owned_Pokes(ID_Owned , poke_id , level , Number_Caught , HP , Atk , Def , Sp_Atk , Sp_Def , Speed , Ev1 , Ev2 , Ev3 , Ev4 , Ev5 , Ev6 , FORM , Owner,EXP,move1,move2,move3,move4,gender,item,Nature,Shiny,ability) VALUES({newnumberofpokes},505050,10,{newnumberofpokes},{hp},{atk},{df},{sp_atk},{sp_def},{speed},0,0,0,0,0,0,0,{ctx.message.author.id},0,'','','','','{pickedg}','None','{nature}','False','{ability}');");
             conn.commit()
             c.close()
 
